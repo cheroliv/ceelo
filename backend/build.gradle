@@ -30,7 +30,7 @@ plugins {
 }
 
 group = "game.ceelo.backend"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.0"
 
 description = ""
 
