@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".playground.PlaygroundFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".playground.PlaygroundFragment">
 
     <ImageView
         android:id="@+id/playerOneFirstDiceImageId"
@@ -12,13 +13,14 @@
         android:layout_height="70dp"
         android:contentDescription="TODO"
 
-        app:srcCompat="@drawable/dice_face_one" />
+        app:srcCompat="@drawable/dice_face_one"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="212dp" />
 
     <ImageView
         android:id="@+id/playerOneMiddleDiceImageId"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="150dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/playerOneFirstDiceImageId"
         app:layout_constraintStart_toEndOf="@+id/playerOneFirstDiceImageId"
@@ -31,12 +33,11 @@
         android:id="@+id/playerOneLastDiceImageId"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="150dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/playerOneMiddleDiceImageId"
         app:layout_constraintEnd_toEndOf="@+id/localPlayerResultText"
-        app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toEndOf="@+id/playerOneMiddleDiceImageId"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/playerOneMiddleDiceImageId"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
@@ -58,7 +59,6 @@
         android:id="@+id/playerTwoMiddleDiceImageId"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="150dp"
         app:layout_constraintBottom_toBottomOf="@+id/playerTwoFirstDiceImageId"
         app:layout_constraintStart_toEndOf="@+id/playerTwoFirstDiceImageId"
         app:layout_constraintTop_toTopOf="@+id/playerTwoFirstDiceImageId"
@@ -69,7 +69,6 @@
         android:id="@+id/playerTwoLastDiceImageId"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginStart="150dp"
         app:layout_constraintBottom_toBottomOf="@+id/playerTwoMiddleDiceImageId"
         app:layout_constraintEnd_toEndOf="@+id/playerOneLastDiceImageId"
         app:layout_constraintHorizontal_bias="1.0"
@@ -90,7 +89,6 @@
         android:id="@+id/localPlayerResultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="204dp"
         android:text="PLAYER RESULT"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
@@ -102,7 +100,6 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="COMPUTER"
         app:layout_constraintStart_toStartOf="@+id/playerOneFirstDiceImageId"
         app:layout_constraintTop_toBottomOf="@+id/playerOneFirstDiceImageId" />
@@ -119,4 +116,4 @@
         app:layout_constraintStart_toEndOf="@+id/textView3" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
