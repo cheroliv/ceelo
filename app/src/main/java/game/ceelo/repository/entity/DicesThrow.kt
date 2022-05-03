@@ -1,6 +1,11 @@
 package game.ceelo.repository.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "dice")
 data class DicesThrow(
+    @PrimaryKey(autoGenerate = true)
     val diceThrowId: Long,
     val gameId:Long,
     val playerId:Long,

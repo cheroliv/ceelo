@@ -1,15 +1,39 @@
 package game.ceelo.vm
 
+import android.app.Application
 import android.view.View
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import game.ceelo.domain.*
+import game.ceelo.repository.entity.DicesThrow
+import game.ceelo.repository.entity.Game
+import game.ceelo.service.CeeloService
 
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
 // on evitera le nested observe
-class DiceGameViewModel : ViewModel() {
+class DiceGameViewModel(application: Application ): AndroidViewModel(application) {
+
+    private val ceeloService: CeeloService?
+    var mDicesThrow: LiveData<List<DicesThrow>>?
+    var mGame: LiveData<List<Game>>?
+
+    init {
+        ceeloService = CeeloService.getInstance(application.applicationContext)
+        mDicesThrow = ceeloService?.getAllDices()
+        mGame = ceeloService?.getAllGames()
+    }
+
+    fun insertDice(dice: DicesThrow) {
+        ceeloService?.insertDice(dice)
+    }
+
+    fun insertGame(game: Game) {
+        ceeloService?.insertGame(game)
+    }
+
     private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
     val playerOneResult: LiveData<DiceThrowResult> = _playerOneResult
     private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()

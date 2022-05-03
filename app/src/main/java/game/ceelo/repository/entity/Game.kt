@@ -1,8 +1,11 @@
 package game.ceelo.repository.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
-
+@Entity(tableName = "game")
 data class Game(
+    @PrimaryKey(autoGenerate = true)
     val gameId: Long,
     val winnerPlayerId:Long,
     val date: Date,
