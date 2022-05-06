@@ -171,3 +171,20 @@ heroku login
 (TODO : pas fini!) +
 
 === Déployer son app mobile sur playstore (TODO)
+
+
+=== Se connecter au back end
+
+==== authentification avec curl en ligne de commande
+
+----
+curl -X 'POST' \
+'http://localhost:8080/api/authenticate' \
+-H 'accept: */*' \
+-H 'Content-Type: application/json' \
+-d '{
+"username": "user",
+"password": "user",
+"rememberMe": true
+}'
+----
