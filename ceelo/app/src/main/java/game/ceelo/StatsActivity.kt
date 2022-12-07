@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import game.ceelo.databinding.ActivityStatsBinding.inflate
+import org.koin.android.ext.android.inject
 
 class StatsActivity : AppCompatActivity() {
 
-//    private val ceeloService: CeeloService by inject()
+    val ceeloService: CeeloService by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

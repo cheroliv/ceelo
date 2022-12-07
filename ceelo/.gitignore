@@ -29,3 +29,4 @@ webflux/build
 
 gradle/wrapper/gradle-wrapper.jar
 /.idea/deploymentTargetDropDown.xml
+/data/

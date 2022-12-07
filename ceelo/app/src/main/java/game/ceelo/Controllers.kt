@@ -9,15 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import game.ceelo.CeeloDicesHandDomain.getDiceImageFromDiceValue
+import game.ceelo.DiceRunResult.*
 import game.ceelo.databinding.ActivityMainBinding
 
 fun ActivityMainBinding.loadLocalGame(
     mainActivity: MainActivity,
     playersUI: List<List<ImageView>>,
-    resultUI: List<TextView>
+    resultUI: List<TextView>,
+    diceGameViewModel: DiceGameViewModel
 ): ActivityMainBinding = apply {
-    val diceGameViewModel = ViewModelProvider(mainActivity)
-        .get(DiceGameViewModel::class.java)
 
     diceGameViewModel.diceGame.observe(mainActivity) { game ->
         playersUI.mapIndexed { i, it ->
@@ -119,8 +119,8 @@ fun setTextViewResult(
 ): TextView = textViewResult.apply {
     visibility = textViewVisibility
     text = when (diceResult) {
-        DiceRunResult.WIN -> DiceRunResult.WIN.toString()
-        DiceRunResult.LOOSE -> DiceRunResult.LOOSE.toString()
-        else -> DiceRunResult.RERUN.toString()
+        WIN -> WIN.toString()
+        LOOSE -> LOOSE.toString()
+        else -> RERUN.toString()
     }
 }
