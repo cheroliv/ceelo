@@ -4,6 +4,7 @@ import android.app.Application
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import game.ceelo.CeeloDicesHandDomain.compareHands
@@ -13,6 +14,7 @@ import game.ceelo.DiceRunResult.*
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
 // on evitera le nested observe
+//class DiceGameViewModel(private val ceeloService:CeeloService) : androidx.lifecycle.ViewModel(){
 class DiceGameViewModel(application: Application) : AndroidViewModel(application){
     //class DiceGameViewModel : ViewModel() {
 
