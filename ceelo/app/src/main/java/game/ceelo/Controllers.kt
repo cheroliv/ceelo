@@ -16,7 +16,6 @@ fun ActivityMainBinding.loadLocalGame(
     diceGameViewModel: DiceGameViewModel,
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>,
-    diceGameViewModel: DiceGameViewModel
 ): ActivityMainBinding = apply {
 
     diceGameViewModel.diceGame.observe(mainActivity) { game ->

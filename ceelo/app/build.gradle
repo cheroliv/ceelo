@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'game.ceelo'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "game.ceelo"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 7
         versionName "0.0.7"
 
@@ -54,7 +54,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation "androidx.core:core-ktx:$androidx_version"
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
@@ -94,13 +94,9 @@ dependencies {
     testImplementation "androidx.room:room-paging:2.5.0-beta02"
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.5.1")
-
-    // Kotlin components
-    //noinspection GradleDependency
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$androidx_lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$androidx_lifecycle_version")
 
     // UI
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
