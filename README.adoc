@@ -1,5 +1,7 @@
 = Jeu de Cee Lo
 
+== play.google: https://play.google.com/store/apps/details?id=game.ceelo[game.ceelo]
+
 === Essayez le cee-lo.
 C'est un jeu populaire lors duquel chaque joueur possède trois dés, +
 en général dans une sorte de verre et chaque joueur lance les dés +
