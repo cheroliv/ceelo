@@ -7,13 +7,13 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import game.ceelo.CeeloDicesHandDomain.getDiceImageFromDiceValue
 import game.ceelo.DiceRunResult.*
 import game.ceelo.databinding.ActivityMainBinding
 
 fun ActivityMainBinding.loadLocalGame(
     mainActivity: MainActivity,
+    diceGameViewModel: DiceGameViewModel,
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>,
     diceGameViewModel: DiceGameViewModel

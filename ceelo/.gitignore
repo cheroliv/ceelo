@@ -29,4 +29,4 @@ webflux/build
 
 gradle/wrapper/gradle-wrapper.jar
 /.idea/deploymentTargetDropDown.xml
-/data/
+/data/koin_bootstrap_question_stackover.md

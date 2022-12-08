@@ -7,13 +7,16 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-private val ceeloModule = module {
+internal val ceeloServiceInMemory: CeeloService by lazy {
+    CeeloServiceInMemory()
+}
+
+val ceeloModule = module {
     single<CeeloService> { CeeloServiceInMemory() }
-    viewModel { DiceGameViewModel(get()) }
+    viewModel{GameViewModel(get())}
 }
 
 class CeeLoApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         startKoin {
@@ -23,3 +26,5 @@ class CeeLoApplication : Application() {
         }
     }
 }
+
+
