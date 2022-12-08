@@ -24,6 +24,7 @@ class CeeLoApplication : Application() {
             androidContext(this@CeeLoApplication)
             modules(ceeloModule)
         }
+//        Log.d(CeeloApplication::class.java.)
     }
 }
 

@@ -13,6 +13,7 @@ import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult.*
 
 class GameViewModel(val ceeloService: CeeloService) : ViewModel() {
+
     fun allGames() = ceeloService.allGames()
 }
 
