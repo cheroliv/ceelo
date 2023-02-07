@@ -62,7 +62,7 @@ tasks.register<GradleBuild>("serve") {
 tasks.register<GradleBuild>("checkWebapp") {
     group = WEBAPP
     description = "launch ceelo backend web application"
-    dir = jdlFile.parentFile
+    doFirst { dir = jdlFile.parentFile }
     tasks = listOf(":check")
 }
 /*=================================================================================*/
@@ -74,14 +74,16 @@ tasks.register<Exec>("jdl") {
     group = WEBAPP
     description = "launch jdl source generator"
     standardOutput = ByteArrayOutputStream()
-    jdlFile.run jdl@{
-        workingDir = this@jdl.parentFile
-        commandLine(
-            "jhipster",
-            "jdl",
-            this@jdl.name,
-            "--force"
-        )
+    doFirst {
+        jdlFile.run jdl@{
+            workingDir = this@jdl.parentFile
+            commandLine(
+                "jhipster",
+                "jdl",
+                this@jdl.name,
+                "--force"
+            )
+        }
     }
 //   doFirst { dependsOn("exportWebappSource","nvmAdjust")
 //   webAppSrc.forEach { copysrc(it, WEBAPP, WEBAPP_SRC) }}
