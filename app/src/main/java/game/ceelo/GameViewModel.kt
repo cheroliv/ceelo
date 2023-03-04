@@ -7,6 +7,11 @@ package game.ceelo
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.animation.Animation
+import android.view.animation.Animation.RELATIVE_TO_SELF
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,8 +20,20 @@ import game.ceelo.Game.runDices
 import game.ceelo.Game.secondPlayer
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.compareHands
+import game.ceelo.Hand.getDiceImageFromDiceValue
+import game.ceelo.R.drawable.*
 
 class GameViewModel(val gameService: GameService) : ViewModel() {
+    val diceImages
+        get() = listOf(
+            dice_face_one,
+            dice_face_two,
+            dice_face_three,
+            dice_face_four,
+            dice_face_five,
+            dice_face_six,
+        )
+
     private val _resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
     val resultPairList: LiveData<List<Pair<GameResult, Int>>> = _resultPair
 
@@ -80,5 +97,56 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
     fun onClickSignOutButton() {
         _greetingVisibility.value = GONE
     }
+    fun playerThrow(
+        playerUI: List<ImageView>,
+        list: List<Int>,
+        resultUI: TextView,
+        playerResult: GameResult
+    ) = playerUI.mapIndexed { i, view ->
+        runDiceAnimation(view, list[i])
+    }.run {
+        setTextViewResult(
+            resultUI,
+            playerResult,
+            resultVisibility.value!!
+        )
+    }
 
+    fun playerUI(
+        game: List<Int>,
+        diceImages: List<Int>,
+        images: List<ImageView>
+    ) = images.mapIndexed { i, image ->
+        image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i]))
+    }
+
+    fun setTextViewResult(
+        textViewResult: TextView,
+        diceResult: GameResult,
+        textViewVisibility: Int
+    ) = textViewResult.apply {
+        visibility = textViewVisibility
+        text = when (diceResult) {
+            WIN -> WIN.toString()
+            LOOSE -> LOOSE.toString()
+            else -> RERUN.toString()
+        }
+    }
+
+    fun runDiceAnimation(
+        diceImage: ImageView,
+        diceValue: Int,
+    ) = diceImage.apply {
+        setImageResource(diceImages.getDiceImageFromDiceValue(diceValue))
+    }.run {
+        startAnimation(
+            RotateAnimation(
+                0f,
+                360f,
+                RELATIVE_TO_SELF,
+                0.5f,
+                RELATIVE_TO_SELF,
+                0.5f
+            ).apply { duration = 500 })
+    }
 }
