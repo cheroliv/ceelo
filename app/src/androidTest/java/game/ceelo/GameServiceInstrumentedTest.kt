@@ -12,16 +12,27 @@ import game.ceelo.Constant.ONE
 import game.ceelo.Constant.SIX
 import game.ceelo.Game.runDices
 import game.ceelo.Playground.launchLocalGame
+import org.junit.Rule
 import org.junit.runner.RunWith
+import org.koin.test.KoinTest
+import org.koin.test.inject
+import org.koin.test.mock.MockProviderRule
+import org.mockito.Mockito
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 
 @RunWith(AndroidJUnit4::class)
-class GameServiceInstrumentedTest {
-    private val gameService: GameService by lazy { GameServiceAndroid() }
-//TODO: set koin
+class GameServiceInstrumentedTest : KoinTest {
+
+    @get:Rule
+    val mockProvider = MockProviderRule.create { clazz ->
+        Mockito.mock(clazz.java)
+    }
+
+    private val gameService: GameService by inject<GameServiceAndroid>()
+
     @BeforeTest
     fun initService() {
 
