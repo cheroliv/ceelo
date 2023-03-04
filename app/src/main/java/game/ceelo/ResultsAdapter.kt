@@ -22,42 +22,6 @@ class ResultsAdapter(
     var games: List<List<List<Int>>>
 ) : Adapter<CeeloViewHolder>() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ) = CeeloViewHolder(
-        from(parent.context).inflate(
-            simple_game_row,
-            parent,
-            false
-        )
-    )
-
-    @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(
-        holder: CeeloViewHolder,
-        position: Int
-    ) = games[position].run {
-        holder.run {
-            game_id.text = (position + 1).toString()
-            player_one_name.text = PLAYER_ONE_NAME
-            player_one_dices_throw.text = firstPlayer().toString()
-            player_one_result.text = firstPlayer().compareHands(secondPlayer()).apply {
-                //TODO:  room persist
-                i(javaClass.simpleName,"TODO: room persist")
-            }.toString()
-            player_one_game_type.text = GAME_TYPE
-            player_two_name.text = PLAYER_TWO_NAME
-            player_two_dices_throw.text = secondPlayer().toString()
-            player_two_result.text = secondPlayer().compareHands(firstPlayer()).toString()
-            player_two_game_type.text = GAME_TYPE
-        }
-
-    }
-
-    override fun getItemCount() = games.size
-
-
     class CeeloViewHolder(
         itemView: View,
         var game_id: TextView = itemView.findViewById(game_id_text),
@@ -70,4 +34,47 @@ class ResultsAdapter(
         var player_two_result: TextView = itemView.findViewById(player_two_result_text),
         var player_two_game_type: TextView = itemView.findViewById(player_two_game_type_text),
     ) : ViewHolder(itemView)
+
+    override fun getItemCount() = games.size
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ) = CeeloViewHolder(
+        from(parent.context).inflate(
+            simple_game_row,
+            parent,
+            false
+        )
+    )
+
+    override fun onBindViewHolder(
+        holder: CeeloViewHolder,
+        position: Int
+    ) = holder.gameHolding(position, games[position])
+        .also {
+            i(javaClass.simpleName, "TODO: room persist")
+            //TODO:  async room persist here
+        }
+
+
+    @SuppressLint("SetTextI18n")
+    private fun CeeloViewHolder.gameHolding(
+        position: Int,
+        hands: List<List<Int>>
+    ) = hands.run {
+        game_id.text = (position + 1).toString()
+        player_one_name.text = PLAYER_ONE_NAME
+        player_one_dices_throw.text = firstPlayer().toString()
+        player_one_result.text = firstPlayer()
+            .compareHands(secondPlayer())
+            .toString()
+        player_one_game_type.text = GAME_TYPE
+        player_two_name.text = PLAYER_TWO_NAME
+        player_two_dices_throw.text = secondPlayer().toString()
+        player_two_result.text = secondPlayer()
+            .compareHands(firstPlayer())
+            .toString()
+        player_two_game_type.text = GAME_TYPE
+    }
 }
