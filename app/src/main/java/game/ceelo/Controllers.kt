@@ -51,11 +51,21 @@ fun ActivityGameBinding.loadLocalGame(
     }
 
     resultTableButton.setOnClickListener {
-        gameActivity.startActivity(Intent(gameActivity, ResultTableActivity::class.java))
+        gameActivity.startActivity(
+            Intent(
+                gameActivity,
+                ResultTableActivity::class.java
+            )
+        )
     }
 
     signinButton.setOnClickListener {
-        gameActivity.startActivity(Intent(gameActivity, LoginActivity::class.java))
+        gameActivity.startActivity(
+            Intent(
+                gameActivity,
+                LoginActivity::class.java
+            )
+        )
     }
 }
 

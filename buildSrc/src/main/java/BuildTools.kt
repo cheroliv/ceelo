@@ -76,7 +76,10 @@ object BuildTools {
                 when (it.key) {
                     "androidx.test.espresso:espresso-core" ->
                         dependencies.add(module.key, dependency(it)) {
-                            exclude("com.android.support", "support-annotations")
+                            exclude(
+                                "com.android.support",
+                                "support-annotations"
+                            )
                         }
 
                     else -> dependencies.add(module.key, dependency(it))

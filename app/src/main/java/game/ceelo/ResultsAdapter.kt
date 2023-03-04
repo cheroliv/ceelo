@@ -1,6 +1,7 @@
 package game.ceelo
 
 import android.annotation.SuppressLint
+import android.util.Log.i
 import android.view.LayoutInflater.from
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,10 @@ class ResultsAdapter(
             game_id.text = (position + 1).toString()
             player_one_name.text = PLAYER_ONE_NAME
             player_one_dices_throw.text = firstPlayer().toString()
-            player_one_result.text = firstPlayer().compareHands(secondPlayer()).toString()
+            player_one_result.text = firstPlayer().compareHands(secondPlayer()).apply {
+                //TODO:  room persist
+                i(javaClass.simpleName,"TODO: room persist")
+            }.toString()
             player_one_game_type.text = GAME_TYPE
             player_two_name.text = PLAYER_TWO_NAME
             player_two_dices_throw.text = secondPlayer().toString()
