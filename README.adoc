@@ -56,6 +56,19 @@ _android-studio_
 sudo snap install android-studio --classic
 ----
 
+=== core features
+
+. authentication/login/signup/activate
+. change password
+. oauth2 socials
+. payement
+
+=== Developpement stack
+
+. Koin
+. Room
+. Retrofit
+
 
 === Test Driven Developpement
 
@@ -138,16 +151,21 @@ Root project 'CeeLoGame' +
 \--- Project ':domain' +
 
 === Executer le domain metier
+
 le fichier game.ceelo.domain.Ceelo.kt possède une fonction main, +
 cela permet d'exécuter du metier indépendamment de tous frameworks.
+
 [source,bash]
 ----
 ./gradlew :domain:run
 ----
 
 === Tester le domain metier
+
 [source,bash]
 ----
 ./gradlew :domain:check
 ----
+
 le rapport de test est ici : domain/build/reports/tests/test/index.html
+

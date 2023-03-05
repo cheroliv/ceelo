@@ -1,6 +1,6 @@
 @file:Suppress("RedundantOverride")
 
-package game.ceelo
+package game.ceelo.stats
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

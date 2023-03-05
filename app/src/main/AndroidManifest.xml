@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CeeLoGame" >
         <activity
-            android:name=".ResultCardsActivity"
+            android:name=".stats.ResultCardsActivity"
             android:exported="false" />
         <activity
             android:name=".auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultTableActivity"
+            android:name=".stats.ResultTableActivity"
             android:exported="false" />
         <activity
             android:name=".GameActivity"

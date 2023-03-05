@@ -6,12 +6,17 @@ import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import game.ceelo.GameActivity
 import game.ceelo.GameResult
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityGameBinding
+import game.ceelo.databinding.ActivityGameBinding.inflate
 
+val GameActivity.binding: ActivityGameBinding
+    get() = inflate(layoutInflater)
+        .apply { setContentView(root) }
 
 fun runDiceAnimation(
     diceImage: ImageView,
@@ -35,7 +40,7 @@ fun setTextViewResult(
     textViewResult: TextView,
     diceResult: GameResult,
     textViewVisibility: Int
-) = textViewResult.apply {
+): TextView = textViewResult.apply {
     visibility = textViewVisibility
     text = when (diceResult) {
         WIN -> WIN.toString()
@@ -44,7 +49,7 @@ fun setTextViewResult(
     }
 }
 
-val ActivityGameBinding.playersUI
+val ActivityGameBinding.playersUI: List<List<ImageView>>
     get() = listOf(
         listOf(
             playerOneFirstDice,
@@ -58,5 +63,6 @@ val ActivityGameBinding.playersUI
         )
     )
 
-val ActivityGameBinding.resultUI get() = listOf(localPlayerResult, computerResult)
+val ActivityGameBinding.resultUI: List<TextView>
+    get() = listOf(localPlayerResult, computerResult)
 

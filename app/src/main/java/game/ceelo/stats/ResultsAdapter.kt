@@ -1,4 +1,4 @@
-package game.ceelo
+package game.ceelo.stats
 
 import android.annotation.SuppressLint
 import android.util.Log.i
@@ -16,7 +16,7 @@ import game.ceelo.Game.secondPlayer
 import game.ceelo.Hand.compareHands
 import game.ceelo.R.id.*
 import game.ceelo.R.layout.simple_game_row
-import game.ceelo.ResultsAdapter.CeeloViewHolder
+import game.ceelo.stats.ResultsAdapter.CeeloViewHolder
 
 class ResultsAdapter(
     var games: List<List<List<Int>>>
