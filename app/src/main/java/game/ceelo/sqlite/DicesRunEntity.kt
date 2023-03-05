@@ -1,4 +1,4 @@
-package game.ceelo
+package game.ceelo.sqlite
 
 import androidx.room.Entity
 import androidx.room.Index

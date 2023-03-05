@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED_VARIABLE", "unused")
 
-package game.ceelo
+package game.ceelo.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,11 +1,12 @@
 @file:Suppress("UNUSED_VARIABLE")
 
-package game.ceelo
+package game.ceelo.controller
 
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import game.ceelo.GameResult
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.R.drawable.*

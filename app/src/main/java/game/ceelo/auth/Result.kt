@@ -1,4 +1,4 @@
-package game.ceelo
+package game.ceelo.auth
 
 /**
  * A generic class that holds a value with its loading status.

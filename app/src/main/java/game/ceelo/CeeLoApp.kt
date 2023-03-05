@@ -1,6 +1,9 @@
 package game.ceelo
 
 import android.app.Application
+import game.ceelo.auth.ISecurityService
+import game.ceelo.auth.SecurityService
+import game.ceelo.vm.GameViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModelOf

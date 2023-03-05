@@ -1,26 +1,23 @@
-@file:Suppress(
-    "MemberVisibilityCanBePrivate",
-    "unused"
-)
-
-package game.ceelo
+package game.ceelo.vm
 
 import android.content.Intent
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import game.ceelo.Constant.ONE
-import game.ceelo.Game.runDices
+import game.ceelo.*
 import game.ceelo.Game.secondPlayer
-import game.ceelo.GameResult.*
 import game.ceelo.Hand.compareHands
 import game.ceelo.Hand.getDiceImageFromDiceValue
-import game.ceelo.databinding.ActivityGameBinding
 import game.ceelo.R.drawable.*
+import game.ceelo.auth.LoginActivity
+import game.ceelo.controller.playersUI
+import game.ceelo.controller.resultUI
+import game.ceelo.controller.runDiceAnimation
+import game.ceelo.controller.setTextViewResult
+import game.ceelo.databinding.ActivityGameBinding
 
 class GameViewModel(val gameService: GameService) : ViewModel() {
 
@@ -31,7 +28,12 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
     val resultVisibility: LiveData<Int> = _resultVisibility
 
     private val _diceGame: MutableLiveData<List<List<Int>>> =
-        MutableLiveData(listOf(listOf(ONE, ONE, ONE), listOf(ONE, ONE, ONE)))
+        MutableLiveData(
+            listOf(
+                listOf(Constant.ONE, Constant.ONE, Constant.ONE),
+                listOf(Constant.ONE, Constant.ONE, Constant.ONE)
+            )
+        )
     val diceGame: LiveData<List<List<Int>>> = _diceGame
 
     private val _games: MutableLiveData<List<List<List<Int>>>> = MutableLiveData()
@@ -45,9 +47,9 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
 
     fun onClickPlayButton() {
         //TODO: ici pour utiliser le service room
-        _diceGame.value = listOf(runDices(), runDices())
+        _diceGame.value = listOf(Game.runDices(), Game.runDices())
         gameService.saveGame(_diceGame.value!!)
-        _resultVisibility.value = VISIBLE
+        _resultVisibility.value = View.VISIBLE
         _games.value = gameService.allGames()
         _resultPair.value = _diceGame
             .value!!
@@ -59,26 +61,26 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
             ).run {
                 listOf(
                     this to when {
-                        this == WIN || this == RERUN -> VISIBLE
-                        else -> GONE
+                        this == GameResult.WIN || this == GameResult.RERUN -> View.VISIBLE
+                        else -> View.GONE
                     }, when {
-                        this == WIN -> LOOSE
-                        this == LOOSE -> WIN
-                        else -> RERUN
+                        this == GameResult.WIN -> GameResult.LOOSE
+                        this == GameResult.LOOSE -> GameResult.WIN
+                        else -> GameResult.RERUN
                     } to when {
-                        this == LOOSE || this == RERUN -> VISIBLE
-                        else -> GONE
+                        this == GameResult.LOOSE || this == GameResult.RERUN -> View.VISIBLE
+                        else -> View.GONE
                     }
                 )
             }
     }
 
     fun onClickSignInButton() {
-        _greetingVisibility.value = VISIBLE
+        _greetingVisibility.value = View.VISIBLE
     }
 
     fun onClickSignOutButton() {
-        _greetingVisibility.value = GONE
+        _greetingVisibility.value = View.GONE
     }
 
     fun playerThrow(
@@ -148,7 +150,7 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
         }
     }
 
-    val diceImages
+    private val diceImages
         get() = listOf(
             dice_face_one,
             dice_face_two,
@@ -158,6 +160,3 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
             dice_face_six,
         )
 }
-
-
-
