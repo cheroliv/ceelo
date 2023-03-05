@@ -18,6 +18,7 @@ import game.ceelo.Game.runDices
 import game.ceelo.Game.secondPlayer
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.compareHands
+import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.databinding.ActivityGameBinding
 import game.ceelo.R.drawable.*
 
@@ -129,8 +130,10 @@ fun GameViewModel.loadLocalGame(
     }
 
     diceGame.observe(gameActivity) { game ->
-        playersUI.mapIndexed { i, it ->
-            playerUI(game[i], diceImages, it)
+        playersUI.mapIndexed { i, images ->
+            images.mapIndexed { j, image ->
+                image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i][j]))
+            }
         }
     }
 

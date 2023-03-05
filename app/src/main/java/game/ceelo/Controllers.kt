@@ -2,7 +2,7 @@
 
 package game.ceelo
 
-import android.view.animation.Animation
+import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,9 +23,9 @@ fun runDiceAnimation(
         RotateAnimation(
             0f,
             360f,
-            Animation.RELATIVE_TO_SELF,
+            RELATIVE_TO_SELF,
             0.5f,
-            Animation.RELATIVE_TO_SELF,
+            RELATIVE_TO_SELF,
             0.5f
         ).apply { duration = 500 })
 }
@@ -41,14 +41,6 @@ fun setTextViewResult(
         LOOSE -> LOOSE.toString()
         else -> RERUN.toString()
     }
-}
-
-fun playerUI(
-    game: List<Int>,
-    diceImages: List<Int>,
-    images: List<ImageView>
-) = images.mapIndexed { i, image ->
-    image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i]))
 }
 
 val ActivityGameBinding.playersUI
