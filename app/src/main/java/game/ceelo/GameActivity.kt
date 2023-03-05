@@ -15,6 +15,5 @@ class GameActivity : AppCompatActivity() {
                 setContentView(root)
             }
         )
-
     }
 }

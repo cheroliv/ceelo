@@ -11,18 +11,11 @@ import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityGameBinding
 
-val diceImages
-    get() = listOf(
-        dice_face_one,
-        dice_face_two,
-        dice_face_three,
-        dice_face_four,
-        dice_face_five,
-        dice_face_six,
-    )
+
 fun runDiceAnimation(
     diceImage: ImageView,
     diceValue: Int,
+    diceImages: List<Int>
 ) = diceImage.apply {
     setImageResource(diceImages.getDiceImageFromDiceValue(diceValue))
 }.run {
