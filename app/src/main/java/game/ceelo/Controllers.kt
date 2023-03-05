@@ -29,6 +29,7 @@ fun runDiceAnimation(
             0.5f
         ).apply { duration = 500 })
 }
+
 fun setTextViewResult(
     textViewResult: TextView,
     diceResult: GameResult,
