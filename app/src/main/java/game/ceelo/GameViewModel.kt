@@ -5,11 +5,9 @@
 
 package game.ceelo
 
+import android.content.Intent
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.animation.Animation
-import android.view.animation.Animation.RELATIVE_TO_SELF
-import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
@@ -20,19 +18,114 @@ import game.ceelo.Game.runDices
 import game.ceelo.Game.secondPlayer
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.compareHands
-import game.ceelo.Hand.getDiceImageFromDiceValue
-import game.ceelo.R.drawable.*
+import game.ceelo.databinding.ActivityGameBinding
+
+
+//fun ActivityGameBinding.loadLocalGame(
+//    gameActivity: GameActivity,
+//    gameViewModel: GameViewModel
+//) = apply {
+//    resultTableButton.setOnClickListener {
+//        gameActivity.startActivity(
+//            Intent(
+//                gameActivity,
+//                ResultTableActivity::class.java
+//            )
+//        )
+//    }
+//
+//    signinButton.setOnClickListener {
+//        gameActivity.startActivity(
+//            Intent(
+//                gameActivity,
+//                LoginActivity::class.java
+//            )
+//        )
+//    }
+//
+//    gameViewModel.apply {
+//        diceGame.observe(gameActivity) { game ->
+//            playersUI.mapIndexed { i, it ->
+//                playerUI(game[i], diceImages, it)
+//            }
+//        }
+//
+//        playLocalButton.setOnClickListener {
+//            onClickPlayButton()
+//            resultUI.mapIndexed { i, view ->
+//                playerThrow(
+//                    playersUI[i],
+//                    diceGame.value!![i],
+//                    view,
+//                    when (i) {
+//                        0 -> resultPairList.value?.first()?.first
+//                        else -> resultPairList.value?.get(1)?.first
+//                    }!!
+//                )
+//            }
+//        }
+//
+//        resultUI.mapIndexed { i, view ->
+//            resultPairList.observe(gameActivity) { result ->
+//                setTextViewResult(view, result[i].first, result[i].second)
+//            }
+//        }
+//    }
+//}
+
+fun GameViewModel.loadLocalGame(
+    gameActivity: GameActivity,
+    binding: ActivityGameBinding
+) = binding.apply {
+    resultTableButton.setOnClickListener {
+        gameActivity.startActivity(
+            Intent(
+                gameActivity,
+                ResultTableActivity::class.java
+            )
+        )
+    }
+
+    signinButton.setOnClickListener {
+        gameActivity.startActivity(
+            Intent(
+                gameActivity,
+                LoginActivity::class.java
+            )
+        )
+    }
+
+    diceGame.observe(gameActivity) { game ->
+        playersUI.mapIndexed { i, it ->
+            playerUI(game[i], diceImages, it)
+        }
+    }
+
+    playLocalButton.setOnClickListener {
+        onClickPlayButton()
+        resultUI.mapIndexed { i, view ->
+            playerThrow(
+                playersUI[i],
+                diceGame.value!![i],
+                view,
+                when (i) {
+                    0 -> resultPairList.value?.first()?.first
+                    else -> resultPairList.value?.get(1)?.first
+                }!!
+            )
+        }
+    }
+
+    resultUI.mapIndexed { i, view ->
+        resultPairList.observe(gameActivity) { result ->
+            setTextViewResult(view, result[i].first, result[i].second)
+        }
+    }
+
+}
 
 class GameViewModel(val gameService: GameService) : ViewModel() {
-    val diceImages
-        get() = listOf(
-            dice_face_one,
-            dice_face_two,
-            dice_face_three,
-            dice_face_four,
-            dice_face_five,
-            dice_face_six,
-        )
+
 
     private val _resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
     val resultPairList: LiveData<List<Pair<GameResult, Int>>> = _resultPair
@@ -97,6 +190,7 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
     fun onClickSignOutButton() {
         _greetingVisibility.value = GONE
     }
+
     fun playerThrow(
         playerUI: List<ImageView>,
         list: List<Int>,
@@ -110,43 +204,5 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
             playerResult,
             resultVisibility.value!!
         )
-    }
-
-    fun playerUI(
-        game: List<Int>,
-        diceImages: List<Int>,
-        images: List<ImageView>
-    ) = images.mapIndexed { i, image ->
-        image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i]))
-    }
-
-    fun setTextViewResult(
-        textViewResult: TextView,
-        diceResult: GameResult,
-        textViewVisibility: Int
-    ) = textViewResult.apply {
-        visibility = textViewVisibility
-        text = when (diceResult) {
-            WIN -> WIN.toString()
-            LOOSE -> LOOSE.toString()
-            else -> RERUN.toString()
-        }
-    }
-
-    fun runDiceAnimation(
-        diceImage: ImageView,
-        diceValue: Int,
-    ) = diceImage.apply {
-        setImageResource(diceImages.getDiceImageFromDiceValue(diceValue))
-    }.run {
-        startAnimation(
-            RotateAnimation(
-                0f,
-                360f,
-                RELATIVE_TO_SELF,
-                0.5f,
-                RELATIVE_TO_SELF,
-                0.5f
-            ).apply { duration = 500 })
     }
 }

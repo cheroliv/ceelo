@@ -2,10 +2,60 @@
 
 package game.ceelo
 
-import android.content.Intent
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
+import android.widget.TextView
 import game.ceelo.GameResult.*
+import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityGameBinding
+
+val diceImages
+    get() = listOf(
+        dice_face_one,
+        dice_face_two,
+        dice_face_three,
+        dice_face_four,
+        dice_face_five,
+        dice_face_six,
+    )
+fun runDiceAnimation(
+    diceImage: ImageView,
+    diceValue: Int,
+) = diceImage.apply {
+    setImageResource(diceImages.getDiceImageFromDiceValue(diceValue))
+}.run {
+    startAnimation(
+        RotateAnimation(
+            0f,
+            360f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        ).apply { duration = 500 })
+}
+fun setTextViewResult(
+    textViewResult: TextView,
+    diceResult: GameResult,
+    textViewVisibility: Int
+) = textViewResult.apply {
+    visibility = textViewVisibility
+    text = when (diceResult) {
+        WIN -> WIN.toString()
+        LOOSE -> LOOSE.toString()
+        else -> RERUN.toString()
+    }
+}
+
+fun playerUI(
+    game: List<Int>,
+    diceImages: List<Int>,
+    images: List<ImageView>
+) = images.mapIndexed { i, image ->
+    image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i]))
+}
 
 val ActivityGameBinding.playersUI
     get() = listOf(
@@ -23,54 +73,3 @@ val ActivityGameBinding.playersUI
 
 val ActivityGameBinding.resultUI get() = listOf(localPlayerResult, computerResult)
 
-fun ActivityGameBinding.loadLocalGame(
-    gameActivity: GameActivity,
-    gameViewModel: GameViewModel
-) = apply {
-    resultTableButton.setOnClickListener {
-        gameActivity.startActivity(
-            Intent(
-                gameActivity,
-                ResultTableActivity::class.java
-            )
-        )
-    }
-
-    signinButton.setOnClickListener {
-        gameActivity.startActivity(
-            Intent(
-                gameActivity,
-                LoginActivity::class.java
-            )
-        )
-    }
-
-    gameViewModel.apply {
-        diceGame.observe(gameActivity) { game ->
-            playersUI.mapIndexed { i, it ->
-                playerUI(game[i], diceImages, it)
-            }
-        }
-
-        playLocalButton.setOnClickListener {
-                onClickPlayButton()
-                resultUI.mapIndexed { i, view ->
-                    playerThrow(
-                        playersUI[i],
-                        diceGame.value!![i],
-                        view,
-                        when (i) {
-                            0 -> resultPairList.value?.first()?.first
-                            else -> resultPairList.value?.get(1)?.first
-                        }!!
-                    )
-                }
-        }
-
-        resultUI.mapIndexed { i, view ->
-            resultPairList.observe(gameActivity) { result ->
-                setTextViewResult(view, result[i].first, result[i].second)
-            }
-        }
-    }
-}
