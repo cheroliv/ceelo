@@ -9,7 +9,6 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-
 class CeeLoApp : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -18,6 +17,7 @@ class CeeLoApp : Application() {
             androidContext(this@CeeLoApp)
             modules(module {
                 singleOf(::GameServiceAndroid) { bind<GameService>() }
+                singleOf(::SecurityService) { bind<ISecurityService>()}
                 viewModelOf(::GameViewModel)
             })
         }

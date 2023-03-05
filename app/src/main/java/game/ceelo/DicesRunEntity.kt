@@ -22,28 +22,3 @@ data class DicesRunEntity(
     val lastDice: Int
 )
 
-@Entity(
-    tableName = "Game", indices = [
-        Index("isDraw"),
-        Index("isOffLineGame"),
-    ]
-)
-data class GameEntity(
-    @PrimaryKey
-    val id: UUID,
-    val winnerPlayerId: UUID,
-    val date: Date,
-    val isDraw: Boolean,
-    val isOffLineGame: Boolean,
-)
-
-@Entity(
-    tableName = "Player", indices = [
-        Index(value = ["login"], unique = true),
-    ]
-)
-data class PlayerEntity(
-    @PrimaryKey
-    val id: UUID,
-    val login: String,
-)

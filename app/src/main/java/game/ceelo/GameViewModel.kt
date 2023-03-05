@@ -95,66 +95,69 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
             resultVisibility.value!!
         )
     }
-}
 
-val GameViewModel.diceImages
-    get() = listOf(
-        dice_face_one,
-        dice_face_two,
-        dice_face_three,
-        dice_face_four,
-        dice_face_five,
-        dice_face_six,
-    )
-
-fun GameViewModel.loadLocalGame(
-    gameActivity: GameActivity,
-    binding: ActivityGameBinding
-) = binding.apply {
-    resultTableButton.setOnClickListener {
-        gameActivity.startActivity(
-            Intent(
-                gameActivity,
-                ResultTableActivity::class.java
+    fun loadLocalGame(
+        gameActivity: GameActivity,
+        binding: ActivityGameBinding
+    ) = binding.apply {
+        resultTableButton.setOnClickListener {
+            gameActivity.startActivity(
+                Intent(
+                    gameActivity,
+                    ResultTableActivity::class.java
+                )
             )
-        )
-    }
+        }
 
-    signinButton.setOnClickListener {
-        gameActivity.startActivity(
-            Intent(
-                gameActivity,
-                LoginActivity::class.java
+        signinButton.setOnClickListener {
+            gameActivity.startActivity(
+                Intent(
+                    gameActivity,
+                    LoginActivity::class.java
+                )
             )
-        )
-    }
+        }
 
-    diceGame.observe(gameActivity) { game ->
-        playersUI.mapIndexed { i, images ->
-            images.mapIndexed { j, image ->
-                image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i][j]))
+        diceGame.observe(gameActivity) { game ->
+            playersUI.mapIndexed { i, images ->
+                images.mapIndexed { j, image ->
+                    image.setImageResource(diceImages.getDiceImageFromDiceValue(game[i][j]))
+                }
+            }
+        }
+
+        playLocalButton.setOnClickListener {
+            onClickPlayButton()
+            resultUI.mapIndexed { i, view ->
+                playerThrow(
+                    playersUI[i],
+                    diceGame.value!![i],
+                    view,
+                    when (i) {
+                        0 -> resultPairList.value?.first()?.first
+                        else -> resultPairList.value?.get(1)?.first
+                    }!!
+                )
+            }
+        }
+
+        resultUI.mapIndexed { i, view ->
+            resultPairList.observe(gameActivity) { result ->
+                setTextViewResult(view, result[i].first, result[i].second)
             }
         }
     }
 
-    playLocalButton.setOnClickListener {
-        onClickPlayButton()
-        resultUI.mapIndexed { i, view ->
-            playerThrow(
-                playersUI[i],
-                diceGame.value!![i],
-                view,
-                when (i) {
-                    0 -> resultPairList.value?.first()?.first
-                    else -> resultPairList.value?.get(1)?.first
-                }!!
-            )
-        }
-    }
-
-    resultUI.mapIndexed { i, view ->
-        resultPairList.observe(gameActivity) { result ->
-            setTextViewResult(view, result[i].first, result[i].second)
-        }
-    }
+    val diceImages
+        get() = listOf(
+            dice_face_one,
+            dice_face_two,
+            dice_face_three,
+            dice_face_four,
+            dice_face_five,
+            dice_face_six,
+        )
 }
+
+
+
