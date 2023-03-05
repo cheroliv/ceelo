@@ -28,37 +28,12 @@ Si deux joueurs ont obtenu exactement la même combinaison, ils doivent rejouer.
   +
 voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 
+=== core features(TODO)
 
-== Environement
-
-=== Installer de l'environement de dev
-
-==== curl, sdkman, java 17, android-studio
-
-_curl_
-[source,bash]
-----
-sudo snap remove curl
-sudo apt install curl
-----
-
-_java & gradle_
-[source,bash]
-----
-curl -s "https://get.sdkman.io" | bash
-sdk i java 17.0.5-tem
-sdk i gradle
-----
-
-_android-studio_
-[source,bash]
-----
-sudo snap install android-studio --classic
-----
-
-=== core features
-
-. authentication/login/signup/activate
+. authentication
+. login
+. signup
+. activate
 . change password
 . oauth2 socials
 . payement
@@ -137,8 +112,34 @@ sudo snap install android-studio --classic
 . `allGames_retourne_toutes_les_parties_et_sont_correct`
 . `saveGame_ajoute_une_partie`
 
- rapport de test
-domain/build/reports/tests/test/index.html
+
+
+== Environement
+
+=== Installer de l'environement de dev
+
+==== curl, sdkman, java 17, android-studio
+
+_curl_
+[source,bash]
+----
+sudo snap remove curl
+sudo apt install curl
+----
+
+_java & gradle_
+[source,bash]
+----
+curl -s "https://get.sdkman.io" | bash
+sdk i java 17.0.5-tem
+sdk i gradle
+----
+
+_android-studio_
+[source,bash]
+----
+sudo snap install android-studio --classic
+----
 
 
 === Architecture du projet
@@ -152,9 +153,6 @@ Root project 'CeeLoGame' +
 
 === Executer le domain metier
 
-le fichier game.ceelo.domain.Ceelo.kt possède une fonction main, +
-cela permet d'exécuter du metier indépendamment de tous frameworks.
-
 [source,bash]
 ----
 ./gradlew :domain:run
@@ -167,5 +165,10 @@ cela permet d'exécuter du metier indépendamment de tous frameworks.
 ./gradlew :domain:check
 ----
 
-Le rapport de test est ici : domain/build/reports/tests/test/index.html +
- et app/build/reports/androidTests/connected/index.html
+=== Tests connectés
+
+[source,bash]
+----
+./gradlew :app:connectedAndroidTest
+----
+
