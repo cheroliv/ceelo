@@ -7,8 +7,6 @@
 package game.ceelo
 
 import androidx.test.core.app.ActivityScenario.launch
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import game.ceelo.Constant.CEELO_DICE_THROW_SIZE
@@ -17,7 +15,6 @@ import game.ceelo.Constant.SIX
 import game.ceelo.Game.runDices
 import game.ceelo.Playground.launchLocalGame
 import game.ceelo.R.id.player_one_first_dice
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.koin.test.KoinTest
@@ -44,12 +41,13 @@ class GameServiceInstrumentedTest : KoinTest {
 
     }
 
-    @Test @Ignore("TODO: too long!")
+//    @org.junit.Ignore("TODO: too long!")
+    @Test
     fun ui_tests() {
         launch(GameActivity::class.java)
-        onView(withId(player_one_first_dice))
-            .check(matches(isCompletelyDisplayed()))
-            .check(matches(isDisplayed()))
+        androidx.test.espresso.Espresso.onView(withId(player_one_first_dice))
+            .check(androidx.test.espresso.assertion.ViewAssertions.matches(isCompletelyDisplayed()))
+            .check(androidx.test.espresso.assertion.ViewAssertions.matches(isDisplayed()))
     }
 
     @Test
