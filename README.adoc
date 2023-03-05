@@ -48,7 +48,6 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 === Test Driven Developpement
 
 ==== Tests Unitaires sur le métier :
-
 . `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`
 
 . `Si le jet contient (4,5,6) alors la propriété is456 renvoi true`
