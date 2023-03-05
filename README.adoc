@@ -167,5 +167,5 @@ cela permet d'exécuter du metier indépendamment de tous frameworks.
 ./gradlew :domain:check
 ----
 
-le rapport de test est ici : domain/build/reports/tests/test/index.html
-
+Le rapport de test est ici : domain/build/reports/tests/test/index.html +
+ et app/build/reports/androidTests/connected/index.html
