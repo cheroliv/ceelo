@@ -118,7 +118,7 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 
 === Installer de l'environement de dev
 
-==== curl, sdkman, java 17, android-studio
+==== curl, sdkman, java 11, android-studio
 
 _curl_
 [source,bash]
@@ -131,7 +131,7 @@ _java & gradle_
 [source,bash]
 ----
 curl -s "https://get.sdkman.io" | bash
-sdk i java 17.0.5-tem
+sdk i java 11.0.18-tem
 sdk i gradle
 ----
 
