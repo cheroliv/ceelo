@@ -17,18 +17,20 @@ object Playground {
 
     fun launchLocalGame(): List<List<Int>> = launchLocalGame(TWO)
 
-    fun runConsoleLocalGame() {
-        var game = launchLocalGame()
-        do {
-            println("player one throw : ${game.firstPlayer()}")
-            println("player two throw : ${game.secondPlayer()}")
-            val result = game.firstPlayer().compareHands(game.secondPlayer())
-            when (result) {
-                WIN -> println("player one : $WIN")
-                else -> println("player two : $WIN")
-            }
-        } while (result == RERUN.apply {
-                game = launchLocalGame()
-            })
-    }
+    fun runConsoleLocalGame() = launchLocalGame().toMutableList().run {
+            do {
+                println("player one throw : ${firstPlayer()}")
+                println("player two throw : ${secondPlayer()}")
+                val result = firstPlayer().compareHands(secondPlayer())
+                when (result) {
+                    WIN -> println("player one : $WIN")
+                    else -> println("player two : $WIN")
+                }
+            } while (result == RERUN.apply {
+                    this@run.run {
+                        clear()
+                        addAll(launchLocalGame())
+                    }
+                })
+        }
 }
