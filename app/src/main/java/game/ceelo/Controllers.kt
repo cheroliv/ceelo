@@ -16,6 +16,15 @@ import game.ceelo.auth.LoginActivity
 import game.ceelo.databinding.ActivityGameBinding
 import game.ceelo.stats.ResultTableActivity
 
+private val diceImages: List<Int>
+    get() = listOf(
+        dice_face_one,
+        dice_face_two,
+        dice_face_three,
+        dice_face_four,
+        dice_face_five,
+        dice_face_six,
+    )
 
 fun GameViewModel.loadLocalGame(gameActivity: GameActivity) = gameActivity
     .binding
@@ -71,16 +80,6 @@ fun GameViewModel.loadLocalGame(gameActivity: GameActivity) = gameActivity
             }
         }
     }
-
-@Suppress("unused")
-fun GameViewModel.onClickSignOutButton() {
-    greetingVisibility.value = GONE
-}
-
-@Suppress("unused")
-fun GameViewModel.onClickSignInButton() {
-    greetingVisibility.value = VISIBLE
-}
 
 fun GameViewModel.onClickPlayButton() {
     //TODO: ici pour utiliser le service room
@@ -148,15 +147,6 @@ private val ActivityGameBinding.playersUI: List<List<ImageView>>
         )
     )
 
-private val diceImages: List<Int>
-    get() = listOf(
-        dice_face_one,
-        dice_face_two,
-        dice_face_three,
-        dice_face_four,
-        dice_face_five,
-        dice_face_six,
-    )
 
 private fun setTextViewResult(
     textViewResult: TextView,
@@ -187,4 +177,14 @@ private fun runDiceAnimation(
             RELATIVE_TO_SELF,
             0.5f
         ).apply { duration = 500 })
+}
+
+@Suppress("unused")
+fun GameViewModel.onClickSignOutButton() {
+    greetingVisibility.value = GONE
+}
+
+@Suppress("unused")
+fun GameViewModel.onClickSignInButton() {
+    greetingVisibility.value = VISIBLE
 }
