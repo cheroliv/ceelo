@@ -21,27 +21,25 @@ import game.ceelo.databinding.ActivityGameBinding
 import game.ceelo.stats.ResultTableActivity
 
 
-class GameViewModel(val gameService: GameService) : ViewModel() {
+class GameViewModel(
+    @Suppress("MemberVisibilityCanBePrivate")
+    val gameService: GameService
+) : ViewModel() {
     companion object {
         private const val NUMBER_PLAYERS = 2
     }
 
     private val resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
-
     private val resultVisibility: MutableLiveData<Int> = MutableLiveData()
-
+    private val games: MutableLiveData<List<List<List<Int>>>> = MutableLiveData()
+    private val greetingVisibility: MutableLiveData<Int> = MutableLiveData()
+    private val greeting: MutableLiveData<String> = MutableLiveData()
     private val diceGame: MutableLiveData<List<List<Int>>> =
         MutableLiveData(mutableListOf<List<Int>>().apply {
             repeat(NUMBER_PLAYERS) { add(listOf(ONE, ONE, ONE)) }
         })
 
-    private val games: MutableLiveData<List<List<List<Int>>>> = MutableLiveData()
-
-    private val greetingVisibility: MutableLiveData<Int> = MutableLiveData()
-
-    private val greeting: MutableLiveData<String> = MutableLiveData()
-
-    private val diceImages
+    private val diceImages: List<Int>
         get() = listOf(
             dice_face_one,
             dice_face_two,
