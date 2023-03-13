@@ -36,13 +36,13 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 . activate
 . change password
 . oauth2 socials
-. payement
+. payment
 
 === Developpement stack
 
 . Koin
 . Room
-. Retrofit
+. Ktor
 
 
 === Test Driven Developpement

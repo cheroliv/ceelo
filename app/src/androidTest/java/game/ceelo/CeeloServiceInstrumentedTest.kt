@@ -6,6 +6,7 @@
 
 package game.ceelo
 
+import androidx.room.Room.inMemoryDatabaseBuilder
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -15,9 +16,19 @@ import game.ceelo.Constant.SIX
 import game.ceelo.Game.runDices
 import game.ceelo.Playground.launchLocalGame
 import game.ceelo.R.id.player_one_first_dice
+import game.ceelo.entities.CeeloDatabase
+import game.ceelo.entities.DicesRunEntity.DicesRunDao
+import game.ceelo.entities.GameEntity.GameDao
+import game.ceelo.entities.PlayerEntity.PlayerDao
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.core.context.loadKoinModules
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 import org.koin.test.KoinTest
+import org.koin.test.get
 import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule.Companion.create
 import org.mockito.Mockito.mock
@@ -28,6 +39,20 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 class CeeloServiceInstrumentedTest : KoinTest {
+    private val testModule = module {
+        singleOf<CeeloDatabase> {
+            inMemoryDatabaseBuilder(
+                get(),
+                CeeloDatabase::class.java
+            ).allowMainThreadQueries()
+                .build()
+        }
+        singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
+        viewModelOf(::GameViewModel)
+        singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
+        singleOf<DicesRunDao> { get<CeeloDatabase>().dicesRunDao() }
+        singleOf<PlayerDao> { get<CeeloDatabase>().playerDao() }
+    }
 
     @get:Rule
     val mockProvider by lazy { create { clazz -> mock(clazz.java) } }
@@ -35,9 +60,9 @@ class CeeloServiceInstrumentedTest : KoinTest {
     private val ceeloService: CeeloService by inject()
 
     @BeforeTest
-    fun initService() { }
+    fun initService() = loadKoinModules(testModule)
 
-//    @org.junit.Ignore("TODO: too long! #DaftPunk")
+    //    @org.junit.Ignore("TODO: too long! #DaftPunk")
     @Test
     fun ui_tests() {
         launch(GameActivity::class.java)
