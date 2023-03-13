@@ -20,10 +20,14 @@ import game.ceelo.entities.CeeloDatabase
 import game.ceelo.entities.DicesRunEntity.DicesRunDao
 import game.ceelo.entities.GameEntity.GameDao
 import game.ceelo.entities.PlayerEntity.PlayerDao
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.loadKoinModules
+import org.koin.core.context.stopKoin
+import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -32,7 +36,6 @@ import org.koin.test.get
 import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule.Companion.create
 import org.mockito.Mockito.mock
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -46,8 +49,9 @@ class CeeloServiceInstrumentedTest : KoinTest {
 
     private val ceeloService: CeeloService by inject()
 
-    @BeforeTest
-    fun initService() = loadKoinModules(module {
+    private val database: CeeloDatabase by inject()
+
+    private val ceeloTest = module {
         singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
         viewModelOf(::GameViewModel)
         singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
@@ -60,7 +64,17 @@ class CeeloServiceInstrumentedTest : KoinTest {
             ).allowMainThreadQueries()
                 .build()
         }
-    })
+    }
+
+    @Before
+    fun initService() = loadKoinModules(ceeloTest)
+
+    @After
+    fun after() {
+        database.close()
+        unloadKoinModules(ceeloTest)
+//        stopKoin()
+    }
 
     //    @org.junit.Ignore("TODO: too long! #DaftPunk")
     @Test
