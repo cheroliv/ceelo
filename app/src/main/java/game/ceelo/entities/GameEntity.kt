@@ -32,8 +32,5 @@ data class GameEntity(
         //List<List<Int>>
         @Insert
         fun saveGame(newGame: GameEntity)
-
-
-
     }
 }

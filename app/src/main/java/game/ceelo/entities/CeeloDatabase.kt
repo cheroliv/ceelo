@@ -34,10 +34,6 @@ abstract class CeeloDatabase : RoomDatabase() {
         @TypeConverter
         fun toZonedDateTime(value: Long?): ZonedDateTime? = value?.tZDT
 
-        val ZonedDateTime.fZDT get() = toInstant()?.toEpochMilli()
 
-        val Long.tZDT: ZonedDateTime?
-            get() = ofEpochMilli(this)
-                .atZone(systemDefault())
     }
 }
