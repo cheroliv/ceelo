@@ -39,20 +39,7 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 class CeeloServiceInstrumentedTest : KoinTest {
-    private val testModule = module {
-        singleOf<CeeloDatabase> {
-            inMemoryDatabaseBuilder(
-                get(),
-                CeeloDatabase::class.java
-            ).allowMainThreadQueries()
-                .build()
-        }
-        singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
-        viewModelOf(::GameViewModel)
-        singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
-        singleOf<DicesRunDao> { get<CeeloDatabase>().dicesRunDao() }
-        singleOf<PlayerDao> { get<CeeloDatabase>().playerDao() }
-    }
+
 
     @get:Rule
     val mockProvider by lazy { create { clazz -> mock(clazz.java) } }
@@ -60,7 +47,20 @@ class CeeloServiceInstrumentedTest : KoinTest {
     private val ceeloService: CeeloService by inject()
 
     @BeforeTest
-    fun initService() = loadKoinModules(testModule)
+    fun initService() = loadKoinModules(module {
+        singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
+        viewModelOf(::GameViewModel)
+        singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
+        singleOf<DicesRunDao> { get<CeeloDatabase>().dicesRunDao() }
+        singleOf<PlayerDao> { get<CeeloDatabase>().playerDao() }
+        singleOf<CeeloDatabase> {
+            inMemoryDatabaseBuilder(
+                get(),
+                CeeloDatabase::class.java
+            ).allowMainThreadQueries()
+                .build()
+        }
+    })
 
     //    @org.junit.Ignore("TODO: too long! #DaftPunk")
     @Test

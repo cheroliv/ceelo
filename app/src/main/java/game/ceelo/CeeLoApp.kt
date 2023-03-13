@@ -2,8 +2,6 @@ package game.ceelo
 
 import android.app.Application
 import androidx.room.Room.databaseBuilder
-import game.ceelo.auth.AuthentificationService
-import game.ceelo.auth.AuthentificationServiceRest
 import game.ceelo.entities.CeeloDatabase
 import game.ceelo.entities.CeeloDatabase.Constants.DB_NAME
 import game.ceelo.entities.DicesRunEntity.DicesRunDao
@@ -20,7 +18,6 @@ import org.koin.dsl.module
 
 
 class CeeLoApp : Application() {
-
     override fun onCreate() {
         super.onCreate()
         startKoin {
@@ -29,6 +26,9 @@ class CeeLoApp : Application() {
             modules(module {
                 singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
                 viewModelOf(::GameViewModel)
+                singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
+                singleOf<DicesRunDao> { get<CeeloDatabase>().dicesRunDao() }
+                singleOf<PlayerDao> { get<CeeloDatabase>().playerDao() }
                 singleOf<CeeloDatabase> {
                     databaseBuilder(
                         get(),
@@ -36,13 +36,8 @@ class CeeLoApp : Application() {
                         DB_NAME
                     ).build()
                 }
-                singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
-                singleOf<DicesRunDao> { get<CeeloDatabase>().dicesRunDao() }
-                singleOf<PlayerDao> { get<CeeloDatabase>().playerDao() }
-                singleOf(::AuthentificationServiceRest) { bind<AuthentificationService>() }
             })
         }
-
     }
 
 }
