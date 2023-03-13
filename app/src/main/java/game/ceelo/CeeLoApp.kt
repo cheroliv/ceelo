@@ -3,14 +3,13 @@ package game.ceelo
 import android.app.Application
 import androidx.room.Room.databaseBuilder
 import game.ceelo.auth.AuthentificationService
-import game.ceelo.auth.AuthentificationServiceKtor
+import game.ceelo.auth.AuthentificationServiceRest
 import game.ceelo.entities.CeeloDatabase
-import game.ceelo.entities.CeeloDatabase.Companion.DB_NAME
+import game.ceelo.entities.CeeloDatabase.Constants.DB_NAME
 import game.ceelo.entities.DicesRunEntity.DicesRunDao
 import game.ceelo.entities.GameEntity.GameDao
 import game.ceelo.entities.PlayerEntity.PlayerDao
 import org.koin.android.ext.android.get
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -28,6 +27,8 @@ class CeeLoApp : Application() {
             androidLogger()
             androidContext(this@CeeLoApp)
             modules(module {
+                singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
+                viewModelOf(::GameViewModel)
                 singleOf<CeeloDatabase> {
                     databaseBuilder(
                         get(),
@@ -38,9 +39,7 @@ class CeeLoApp : Application() {
                 singleOf<GameDao> { get<CeeloDatabase>().gameDao() }
                 singleOf<DicesRunDao> { get<CeeloDatabase>().dicesRunDao() }
                 singleOf<PlayerDao> { get<CeeloDatabase>().playerDao() }
-                singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
-                viewModelOf(::GameViewModel)
-                singleOf(::AuthentificationServiceKtor) { bind<AuthentificationService>() }
+                singleOf(::AuthentificationServiceRest) { bind<AuthentificationService>() }
             })
         }
 

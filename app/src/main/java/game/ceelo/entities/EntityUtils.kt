@@ -4,10 +4,10 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-object EntitiesUtils {
-    val ZonedDateTime.fZDT get() = toInstant()?.toEpochMilli()
+object EntityUtils {
+    val ZonedDateTime.fromDateTime get() = toInstant()?.toEpochMilli()
 
-    val Long.tZDT: ZonedDateTime?
+    val Long.toDateTime: ZonedDateTime?
         get() = Instant.ofEpochMilli(this)
             .atZone(ZoneId.systemDefault())
 }

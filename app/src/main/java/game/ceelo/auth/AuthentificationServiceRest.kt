@@ -1,6 +1,6 @@
 package game.ceelo.auth
 
-class AuthentificationServiceKtor : AuthentificationService {
+class AuthentificationServiceRest : AuthentificationService {
     override fun login(username: String, password: String): Boolean {
         return true
     }
