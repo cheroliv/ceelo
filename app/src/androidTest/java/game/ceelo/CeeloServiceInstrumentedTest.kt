@@ -26,7 +26,6 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.loadKoinModules
-import org.koin.core.context.stopKoin
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -42,7 +41,6 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 class CeeloServiceInstrumentedTest : KoinTest {
-
 
     @get:Rule
     val mockProvider by lazy { create { clazz -> mock(clazz.java) } }

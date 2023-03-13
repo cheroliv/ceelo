@@ -3,7 +3,7 @@ package game.ceelo
 import android.app.Application
 import androidx.room.Room.databaseBuilder
 import game.ceelo.entities.CeeloDatabase
-import game.ceelo.entities.CeeloDatabase.Constants.DB_NAME
+import game.ceelo.entities.CeeloDatabase.DATABASE.DB_NAME
 import game.ceelo.entities.DicesRunEntity.DicesRunDao
 import game.ceelo.entities.GameEntity.GameDao
 import game.ceelo.entities.PlayerEntity.PlayerDao

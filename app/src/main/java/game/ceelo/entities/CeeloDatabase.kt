@@ -6,8 +6,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import game.ceelo.entities.EntityUtils.fromDateTime
-import game.ceelo.entities.EntityUtils.toDateTime
+import game.ceelo.entities.CeeloDatabase.TypeUtils.fromDateTime
+import game.ceelo.entities.CeeloDatabase.TypeUtils.toDateTime
+import game.ceelo.entities.CeeloDatabase.TypesConverter
+import java.time.Instant
+import java.time.ZoneId
 import java.time.ZonedDateTime
 
 @Database(
@@ -17,17 +20,13 @@ import java.time.ZonedDateTime
         PlayerEntity::class
     ], version = 1
 )
-@TypeConverters(CeeloDatabase::class)
+@TypeConverters(TypesConverter::class)
 abstract class CeeloDatabase : RoomDatabase() {
-    object Constants {
-        const val DB_NAME = "ceelo.db"
-    }
-
     abstract fun dicesRunDao(): DicesRunEntity.DicesRunDao
     abstract fun gameDao(): GameEntity.GameDao
     abstract fun playerDao(): PlayerEntity.PlayerDao
 
-    companion object {
+    object TypesConverter{
         @JvmStatic
         @TypeConverter
         fun fromZonedDateTime(value: ZonedDateTime?): Long? = value?.fromDateTime
@@ -35,5 +34,17 @@ abstract class CeeloDatabase : RoomDatabase() {
         @JvmStatic
         @TypeConverter
         fun toZonedDateTime(value: Long?): ZonedDateTime? = value?.toDateTime
+    }
+
+    object TypeUtils {
+        val ZonedDateTime.fromDateTime: Long? get() = toInstant()?.toEpochMilli()
+
+        val Long.toDateTime: ZonedDateTime?
+            get() = Instant.ofEpochMilli(this)
+                .atZone(ZoneId.systemDefault())
+    }
+
+    object DATABASE {
+        const val DB_NAME = "ceelo.db"
     }
 }
