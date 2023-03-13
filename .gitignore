@@ -11,4 +11,3 @@ gradle/wrapper/gradle-wrapper.jar
 /.idea/
 /data/
 webapp.tar
-/app/schemas/game.ceelo.CeeLoApp.CeeloDatabase/*.json

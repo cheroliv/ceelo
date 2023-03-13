@@ -6,7 +6,6 @@ import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import game.ceelo.CeeLoApp.CeeloDatabase.DatabaseTypeConverters
 import game.ceelo.auth.AuthentificationService
 import game.ceelo.auth.AuthentificationServiceKtor
 import game.ceelo.entities.DicesRunEntity
@@ -62,32 +61,28 @@ class CeeLoApp : Application() {
             PlayerEntity::class
         ], version = 1
     )
-    @TypeConverters(DatabaseTypeConverters::class)
+    @TypeConverters(CeeloDatabase::class)
     abstract class CeeloDatabase : RoomDatabase() {
         abstract fun dicesRunDao(): DicesRunDao
         abstract fun gameDao(): GameDao
         abstract fun playerDao(): PlayerDao
 
-        class DatabaseTypeConverters {
-            companion object {
+        companion object {
 
-                @JvmStatic
-                @TypeConverter
-                fun fromZonedDateTime(value: ZonedDateTime?): Long? =
-                    value
-                        ?.toInstant()
-                        ?.toEpochMilli()
+            @JvmStatic
+            @TypeConverter
+            fun fromZonedDateTime(value: ZonedDateTime?): Long? =
+                value
+                    ?.toInstant()
+                    ?.toEpochMilli()
 
-                @JvmStatic
-                @TypeConverter
-                fun toZonedDateTime(value: Long?): ZonedDateTime? = value?.run {
-                    ofEpochMilli(this)
-                        .atZone(systemDefault())
-                }
+            @JvmStatic
+            @TypeConverter
+            fun toZonedDateTime(value: Long?): ZonedDateTime? = value?.run {
+                ofEpochMilli(this)
+                    .atZone(systemDefault())
             }
         }
-
-
     }
 }
 
