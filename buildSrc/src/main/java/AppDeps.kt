@@ -78,6 +78,7 @@ object AppDeps {
             "io.insert-koin:koin-androidx-navigation" to KOIN_ANDROID_VERSION,
             "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
             "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
+       //TODO: https://blog.devgenius.io/out-with-retrofit-and-in-with-ktor-client-e8b52f205139
         )
     }
 
