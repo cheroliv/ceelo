@@ -1,7 +1,9 @@
 package game.ceelo.entities
 
 import androidx.room.*
+import java.time.Instant
 import java.time.Instant.ofEpochMilli
+import java.time.ZoneId
 import java.time.ZoneId.systemDefault
 import java.time.ZonedDateTime
 import java.time.ZonedDateTime.now
@@ -30,23 +32,6 @@ data class GameEntity(
         //List<List<Int>>
         @Insert
         fun saveGame(newGame: GameEntity)
-
-
-//            companion object {
-//                @TypeConverter
-//                @JvmStatic
-//                fun fromInstant(value: Instant): Long {
-//                    return value.toEpochMilli()
-//                }
-//
-//                @TypeConverter
-//                @JvmStatic
-//                fun toInstant(value: Long): Instant {
-//                    return Instant.ofEpochMilli(value)
-//                }
-//            }
-//        }
-
 
 
 
