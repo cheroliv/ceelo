@@ -26,7 +26,6 @@ object AppDeps {
     private const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
 
-
     @JvmStatic
     val appModules by lazy {
         mapOf(
@@ -77,6 +76,8 @@ object AppDeps {
             "io.insert-koin:koin-android" to KOIN_ANDROID_VERSION,
             "io.insert-koin:koin-androidx-workmanager" to KOIN_ANDROID_VERSION,
             "io.insert-koin:koin-androidx-navigation" to KOIN_ANDROID_VERSION,
+            "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
+            "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
         )
     }
 
@@ -102,8 +103,6 @@ object AppDeps {
         mapOf(
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
-            "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
-            "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
             "androidx.room:room-testing" to ROOM_VERSION,
             "io.insert-koin:koin-test" to KOIN_VERSION,
             "io.insert-koin:koin-test-junit4" to KOIN_VERSION,

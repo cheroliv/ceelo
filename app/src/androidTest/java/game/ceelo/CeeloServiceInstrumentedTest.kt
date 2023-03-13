@@ -71,8 +71,9 @@ class CeeloServiceInstrumentedTest : KoinTest {
     fun after() {
         database.close()
         unloadKoinModules(ceeloTest)
-//        stopKoin()
     }
+
+
 
     //    @org.junit.Ignore("TODO: too long! #DaftPunk")
     @Test

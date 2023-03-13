@@ -1,15 +1,15 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
 package game.ceelo
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import game.ceelo.*
+import game.ceelo.CeeLoApp.Companion.NUMBER_PLAYERS
 import game.ceelo.Constant.ONE
 import game.ceelo.R.drawable.*
 
-private const val NUMBER_PLAYERS = 2
 
 class GameViewModel(
-    @Suppress("MemberVisibilityCanBePrivate")
     val ceeloService: CeeloService
 ) : ViewModel() {
     internal val resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
