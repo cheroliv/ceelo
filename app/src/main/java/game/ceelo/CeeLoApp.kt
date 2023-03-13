@@ -28,9 +28,9 @@ class CeeLoApp : Application() {
             androidLogger()
             androidContext(this@CeeLoApp)
             modules(module {
-                single {
+                singleOf<CeeloDatabase> {
                     databaseBuilder(
-                        androidApplication(),
+                        get(),
                         CeeloDatabase::class.java,
                         DB_NAME
                     ).build()
