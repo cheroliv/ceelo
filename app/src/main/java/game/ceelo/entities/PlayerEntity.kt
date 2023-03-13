@@ -1,8 +1,6 @@
-package game.ceelo.sqlite
+package game.ceelo.entities
 
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.util.*
 
 @Entity(
@@ -14,4 +12,8 @@ data class PlayerEntity(
     @PrimaryKey
     val id: UUID,
     val login: String,
-)
+){
+
+    @Dao
+    interface PlayerDao
+}

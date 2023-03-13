@@ -10,7 +10,7 @@ private const val NUMBER_PLAYERS = 2
 
 class GameViewModel(
     @Suppress("MemberVisibilityCanBePrivate")
-    val gameService: GameService
+    val ceeloService: CeeloService
 ) : ViewModel() {
     internal val resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
     internal val resultVisibility: MutableLiveData<Int> = MutableLiveData()

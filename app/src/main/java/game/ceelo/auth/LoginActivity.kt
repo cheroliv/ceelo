@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
             setContentView(root)
             login.setOnClickListener {
                 val authService = null
-                if (get<ISecurityService>().login(
+                if (get<AuthentificationService>().login(
                         username.text.toString(),
                         password.text.toString()
                     )) finish()

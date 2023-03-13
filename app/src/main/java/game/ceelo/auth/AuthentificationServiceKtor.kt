@@ -1,6 +1,6 @@
 package game.ceelo.auth
 
-class SecurityService : ISecurityService {
+class AuthentificationServiceKtor : AuthentificationService {
     override fun login(username: String, password: String): Boolean {
         return true
     }

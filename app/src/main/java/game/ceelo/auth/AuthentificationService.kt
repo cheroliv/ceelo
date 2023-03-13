@@ -1,5 +1,5 @@
 package game.ceelo.auth
 
-interface ISecurityService {
+interface AuthentificationService {
     fun login(username: String, password: String): Boolean
 }

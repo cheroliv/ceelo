@@ -1,17 +1,24 @@
 package game.ceelo
 
 import game.ceelo.Game.runDices
-import game.ceelo.GameServiceInMemory.InMemoryData.addGame
-import game.ceelo.GameServiceInMemory.InMemoryData.getAllGames
+import game.ceelo.CeeloServiceAndroid.InMemoryData.addGame
+import game.ceelo.CeeloServiceAndroid.InMemoryData.getAllGames
 
-class GameServiceInMemory : GameService {
-    private object InMemoryData {
+//TODO: add room, retrofit
+class CeeloServiceAndroid : CeeloService {
+    object InMemoryData {
         private val repo: MutableList<List<List<Int>>> by lazy {
-            MutableList(0) { mutableListOf(runDices(), runDices()) }
+            MutableList(size = 0,
+                init = {
+                    mutableListOf(
+                        runDices(),
+                        runDices()
+                    )
+                })
         }
 
         @JvmStatic
-        fun getAllGames(): List<List<List<Int>>> = repo
+        fun getAllGames(): List<List<List<Int>>> = repo//TODO: pagination circular buffer
 
         @JvmStatic
         fun addGame(game: List<List<Int>>) {

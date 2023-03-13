@@ -1,5 +1,6 @@
-package game.ceelo.sqlite
+package game.ceelo.entities
 
+import androidx.room.Dao
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -20,5 +21,8 @@ data class DicesRunEntity(
     val firstDice: Int,
     val middleDice: Int,
     val lastDice: Int
-)
+){
+    @Dao
+    interface DicesRunDao
+}
 

@@ -92,8 +92,8 @@ object AppDeps {
             "androidx.arch.core:core-testing" to ANDROIDX_ARCH_CORE_VERSION,
             "androidx.test.espresso:espresso-core" to ESPRESSO_VERSION,
             "androidx.test.ext:junit" to ANDROIDX_JUNIT_VERSION,
-            "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
             "io.insert-koin:koin-test" to KOIN_VERSION,
+            "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
         )
     }
 

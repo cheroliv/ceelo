@@ -84,9 +84,9 @@ fun GameViewModel.loadLocalGame(gameActivity: GameActivity) = gameActivity
 fun GameViewModel.onClickPlayButton() {
     //TODO: ici pour utiliser le service room
     diceGame.value = listOf(Game.runDices(), Game.runDices())
-    gameService.saveGame(diceGame.value!!)
+    ceeloService.saveGame(diceGame.value!!)
     resultVisibility.value = VISIBLE
-    games.value = gameService.allGames()
+    games.value = ceeloService.allGames()
     resultPair.value = diceGame
         .value!!
         .first()

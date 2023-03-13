@@ -27,12 +27,12 @@ import kotlin.test.assertEquals
 
 
 @RunWith(AndroidJUnit4::class)
-class GameServiceInstrumentedTest : KoinTest {
+class CeeloServiceInstrumentedTest : KoinTest {
 
     @get:Rule
     val mockProvider by lazy { create { clazz -> mock(clazz.java) } }
 
-    private val gameService: GameService by inject()
+    private val ceeloService: CeeloService by inject()
 
     @BeforeTest
     fun initService() { }
@@ -63,7 +63,7 @@ class GameServiceInstrumentedTest : KoinTest {
 
     @Test
     fun allGames_retourne_toutes_les_parties_et_sont_correct() {
-        gameService
+        ceeloService
             .allGames()
             .forEach { game ->
                 assertEquals(2, game.size)
@@ -80,9 +80,9 @@ class GameServiceInstrumentedTest : KoinTest {
 
     @Test
     fun saveGame_ajoute_une_partie() {
-        gameService.allGames().size.run {
-            gameService.saveGame(listOf(runDices(), runDices()))
-            assertEquals(this + 1, gameService.allGames().size)
+        ceeloService.allGames().size.run {
+            ceeloService.saveGame(listOf(runDices(), runDices()))
+            assertEquals(this + 1, ceeloService.allGames().size)
         }
     }
 }

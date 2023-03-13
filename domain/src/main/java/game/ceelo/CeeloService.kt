@@ -32,7 +32,7 @@ If banker lost all his money which is in the bank then game will start from step
  */
 
 
-interface GameService {
+interface CeeloService {
     fun allGames(): List<List<List<Int>>>
     fun saveGame(newGame: List<List<Int>>)
     fun connect()

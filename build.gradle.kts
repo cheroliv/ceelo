@@ -1,16 +1,3 @@
-import AppDeps.appModules
-import BuildDeps.buildDependencies
-import BuildTools.dependency
-import BuildTools.jdlFile
-import BuildTools.webAppSrc
-import Constants.WEBAPP
-import Constants.WEBAPP_SRC
-import DomainDeps.domainDeps
-import DomainDeps.domainTestDeps
-import java.io.ByteArrayOutputStream
-import java.lang.System.getProperty
-
-
 /*=================================================================================*/
 buildscript {
     repositories {

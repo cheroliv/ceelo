@@ -1,0 +1,54 @@
+package game.ceelo.entities
+
+import androidx.room.*
+import java.time.Instant.ofEpochMilli
+import java.time.ZoneId.systemDefault
+import java.time.ZonedDateTime
+import java.time.ZonedDateTime.now
+import java.util.*
+
+@Entity(
+    tableName = "Game", indices = [
+        Index("isDraw"),
+        Index("isOffLineGame"),
+    ]
+)
+data class GameEntity(
+    @PrimaryKey
+    val id: UUID,
+    val winnerPlayerId: UUID,
+    val isDraw: Boolean,
+    val isOffLineGame: Boolean,
+    val date: ZonedDateTime = now(),
+) {
+    @Dao
+    interface GameDao {
+        // List<List<List<Int>>>
+        @Query("SELECT * FROM Game")
+        fun allGames(): List<GameEntity>
+
+        //List<List<Int>>
+        @Insert
+        fun saveGame(newGame: GameEntity)
+
+
+//            companion object {
+//                @TypeConverter
+//                @JvmStatic
+//                fun fromInstant(value: Instant): Long {
+//                    return value.toEpochMilli()
+//                }
+//
+//                @TypeConverter
+//                @JvmStatic
+//                fun toInstant(value: Long): Instant {
+//                    return Instant.ofEpochMilli(value)
+//                }
+//            }
+//        }
+
+
+
+
+    }
+}
