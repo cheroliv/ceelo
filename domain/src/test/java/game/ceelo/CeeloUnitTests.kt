@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused","NonAsciiCharacters")
 
 package game.ceelo
 
@@ -47,8 +47,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
 
-@Suppress("NonAsciiCharacters")
-class CeeloUnitTest {
+class CeeloUnitTests {
 
 //    fun initPlayground(
 //        @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
