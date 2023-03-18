@@ -1,12 +1,6 @@
 package game.ceelo.entities
 
-import android.content.ContentValues
 import androidx.room.*
-import game.ceelo.Constant
-import java.time.Instant
-import java.time.Instant.ofEpochMilli
-import java.time.ZoneId
-import java.time.ZoneId.systemDefault
 import java.time.ZonedDateTime
 import java.time.ZonedDateTime.now
 import java.util.*

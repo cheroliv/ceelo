@@ -21,6 +21,7 @@ import game.ceelo.Game.runDices
 import game.ceelo.Playground.launchLocalGame
 import game.ceelo.R.id.player_one_first_dice
 import game.ceelo.entities.PlayerEntity
+import game.ceelo.entities.PlayerEntity.PlayerDao.Companion.checkDefaultPlayers
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

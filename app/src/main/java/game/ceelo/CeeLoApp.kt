@@ -1,12 +1,11 @@
 package game.ceelo
 
 import android.app.Application
-import android.util.Log.i
 import androidx.room.Room.databaseBuilder
-import androidx.room.RoomDatabase
 import androidx.room.RoomDatabase.Callback
 import androidx.sqlite.db.SupportSQLiteDatabase
 import game.ceelo.Database.Companion.DB_NAME
+import game.ceelo.entities.PlayerEntity.PlayerDao.Companion.checkDefaultPlayers
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -15,7 +14,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import java.util.*
 
 class CeeLoApp : Application() {
 
