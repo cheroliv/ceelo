@@ -71,17 +71,17 @@ class CeeloServiceInstrumentedTest : KoinTest {
     fun initService() = loadKoinModules(ceeloTest)
 
     @After
-    fun after() {
-        database.close()
-        unloadKoinModules(ceeloTest)
-    }
+    fun after() = database
+        .close()
+        .also { unloadKoinModules(ceeloTest) }
 
     @Test
     fun test_checkDefaultPlayers() = Pair(
         listOf(
             PlayerEntity(ONE, PLAYER_ONE_NAME),
             PlayerEntity(TWO, PLAYER_TWO_NAME),
-        ), get<Database>().playerDao().all(),
+        ),
+        get<Database>().playerDao().all(),
     ).run {
         assertEquals(first.count(), second.count())
         assertEquals(NUMBER_PLAYERS, second.count())
@@ -97,7 +97,7 @@ class CeeloServiceInstrumentedTest : KoinTest {
     }
 
     @Test
-    fun localDicesThrow_retourne_un_jeux_de_jet_de_dès_correct() {
+    fun localDicesThrow_retourne_un_jeux_de_jet_de_dès_correct() =
         launchLocalGame().run {
             assertEquals(2, size)
             first().run hand@{
@@ -109,10 +109,9 @@ class CeeloServiceInstrumentedTest : KoinTest {
                 forEach { assert(it in ONE..SIX) }
             }
         }
-    }
 
     @Test
-    fun allGames_retourne_toutes_les_parties_et_sont_correct() {
+    fun allGames_retourne_toutes_les_parties_et_sont_correct() =
         ceeloService.allGames().forEach { game ->
             assertEquals(2, game.size)
             game.first().run {
@@ -124,13 +123,14 @@ class CeeloServiceInstrumentedTest : KoinTest {
                 forEach { assert(it in (ONE..SIX)) }
             }
         }
-    }
 
     @Test
-    fun saveGame_ajoute_une_partie() {
-        ceeloService.allGames().size.run {
-            ceeloService.saveGame(listOf(runDices(), runDices()))
-            assertEquals(this + 1, ceeloService.allGames().size)
-        }
-    }
+    fun saveGame_ajoute_une_partie() =
+        ceeloService
+            .allGames()
+            .size
+            .run {
+                ceeloService.saveGame(listOf(runDices(), runDices()))
+                assertEquals(this + 1, ceeloService.allGames().size)
+            }
 }
