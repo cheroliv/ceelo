@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log.i
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
+import androidx.room.RoomDatabase.Callback
 import androidx.sqlite.db.SupportSQLiteDatabase
 import game.ceelo.Database.Companion.DB_NAME
 import org.koin.android.ext.android.get
@@ -22,12 +23,6 @@ class CeeLoApp : Application() {
         const val NUMBER_PLAYERS = 2
     }
 
-    @Suppress("unused")
-    private lateinit var userId: UUID
-
-    @Suppress("unused")
-    private lateinit var systemId: UUID
-
     override fun onCreate() {
         super.onCreate()
         startKoin {
@@ -41,32 +36,15 @@ class CeeLoApp : Application() {
                         get(),
                         Database::class.java,
                         DB_NAME
-                    )
-                        .addCallback(object : RoomDatabase.Callback() {
-                            override fun onCreate(db: SupportSQLiteDatabase) {
-                                super.onCreate(db)
-                                i("callback", "baztux")
-                                val playerCount = db.query("select * from Player").count
-                                i(CeeLoApp::class.java.simpleName, playerCount.toString())
-                                db.addDefaultPlayers()
-                            }
-                        })
-
-                        .build()
+                    ).addCallback(object : Callback() {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            db.checkDefaultPlayers()
+                        }
+                    }).build()
                 }
             })
         }
     }
-//     val databasePostConstruct: Callback
-//        get() = object : Callback() {
-//            override fun onCreate(db: SupportSQLiteDatabase) {
-//                super.onCreate(db)
-//                Log.i("foobar", "baztux")
-//                val playerCount = db.query("select * from Player").count
-//                Log.i(CeeLoApp::class.java.simpleName, playerCount.toString())
-//            }
-//        }
-
-
 }
 

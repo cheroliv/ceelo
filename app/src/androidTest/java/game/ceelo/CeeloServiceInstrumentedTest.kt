@@ -4,16 +4,19 @@
 
 package game.ceelo
 
-import android.util.Log.i
 import androidx.room.Room.inMemoryDatabaseBuilder
 import androidx.room.RoomDatabase.Callback
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import game.ceelo.CeeLoApp.Companion.NUMBER_PLAYERS
 import game.ceelo.Constant.CEELO_DICE_THROW_SIZE
 import game.ceelo.Constant.ONE
+import game.ceelo.Constant.PLAYER_ONE_NAME
+import game.ceelo.Constant.PLAYER_TWO_NAME
 import game.ceelo.Constant.SIX
+import game.ceelo.Constant.TWO
 import game.ceelo.Game.runDices
 import game.ceelo.Playground.launchLocalGame
 import game.ceelo.R.id.player_one_first_dice
@@ -32,8 +35,6 @@ import org.koin.test.get
 import org.koin.test.inject
 import org.koin.test.mock.MockProviderRule.Companion.create
 import org.mockito.Mockito.mock
-import java.math.BigInteger
-import java.math.BigInteger.ZERO
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -57,13 +58,10 @@ class CeeloServiceInstrumentedTest : KoinTest {
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        i("foobar", "baztux")
-                        val playerCount = db.query("select * from Player").count
-                        i(CeeLoApp::class.java.simpleName, playerCount.toString())
-                        db.addDefaultPlayers()
+                        assertEquals(0, db.query("select * from Player").count)
+                        db.checkDefaultPlayers()
                     }
-                })
-                .build()
+                }).build()
         }
     }
 
@@ -77,13 +75,20 @@ class CeeloServiceInstrumentedTest : KoinTest {
     }
 
     @Test
-    fun db_populate() {
-//        i(CeeLoApp::class.java.simpleName, get<Database>().playerDao().count().toString())
-        assertEquals(0,get<Database>().playerDao().count().toInt())
-//        assertEquals(NUMBER_PLAYERS,get<Database>().playerDao().count().toInt())
+    fun test_checkDefaultPlayers() {
+        get<Database>().playerDao().run {
+            assertEquals(NUMBER_PLAYERS, count())
+            all().run {
+                setOf(
+                    Pair(ONE, first().id),
+                    Pair(PLAYER_ONE_NAME, first().login),
+                    Pair(TWO, last().id),
+                    Pair(PLAYER_TWO_NAME, last().login),
+                ).forEach { (first, second) -> assertEquals(first, second) }
+            }
+        }
     }
 
-    //    @org.junit.Ignore("TODO: too long! #DaftPunk")
     @Test
     fun ui_tests() {
         launch(GameActivity::class.java)

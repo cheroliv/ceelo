@@ -17,8 +17,8 @@ import java.util.*
 )
 data class GameEntity(
     @PrimaryKey
-    val id: UUID,
-    val winnerPlayerId: UUID,
+    val id: Int,
+    val winnerPlayerId: Int,
     val isDraw: Boolean,
     val isOffLineGame: Boolean,
     val date: ZonedDateTime = now(),

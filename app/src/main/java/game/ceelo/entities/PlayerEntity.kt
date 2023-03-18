@@ -11,16 +11,19 @@ import java.util.*
 )
 data class PlayerEntity(
     @PrimaryKey
-    val id: UUID,
+    val id: Int,
     val login: String,
 ) {
 
     @Dao
     interface PlayerDao {
-//        @Query("SELECT * FROM Player p Where p.id = id")
-//        fun findOne(id:UUID): PlayerEntity
+        @Query("SELECT * FROM Player p Where p.id = :id")
+        fun findOne(id:Int): PlayerEntity
 
-        @Query("SELECT count(*) FROM Player")
-        fun count(): Long
+        @Query("SELECT COUNT(*) FROM Player")
+        fun count(): Int
+
+        @Query("SELECT * FROM Player")
+        fun all(): List<PlayerEntity>
     }
 }

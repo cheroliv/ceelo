@@ -2,8 +2,15 @@
 
 package game.ceelo
 
+import android.content.ContentValues
+import android.database.sqlite.SQLiteDatabase.CONFLICT_FAIL
+import android.util.Log.i
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
+import game.ceelo.Constant.ONE
+import game.ceelo.Constant.PLAYER_ONE_NAME
+import game.ceelo.Constant.PLAYER_TWO_NAME
+import game.ceelo.Constant.TWO
 import game.ceelo.Database.TypeUtils.fromDateTime
 import game.ceelo.Database.TypeUtils.toDateTime
 import game.ceelo.Database.TypesConverter
@@ -17,8 +24,6 @@ import java.time.Instant.ofEpochMilli
 import java.time.ZoneId.systemDefault
 import java.time.ZonedDateTime
 import java.util.*
-import android.util.Log.i
-
 
 
 @androidx.room.Database(
@@ -55,24 +60,22 @@ abstract class Database : RoomDatabase() {
         const val DB_NAME = "ceelo.db"
     }
 }
-
-
-fun SupportSQLiteDatabase.addDefaultPlayers(){
-    i("populate database","addDefaultPlayers")
-    //            if (playerCount == 0) {
-//                db.run {
-//                    beginTransaction()
-//                    setOf(ContentValues().apply {
-//                        put("id", UUID.randomUUID().toString())
-//                        put("login", "user")
-//                    }, ContentValues().apply {
-//                        put("id", UUID.randomUUID().toString())
-//                        put("login", "computer")
-//                    }).map {
-//                        insert("Player", CONFLICT_FAIL, it)
-//                        it.clear()
-//                    }
-//                    endTransaction()
-//                }
-//            }
+fun SupportSQLiteDatabase.checkDefaultPlayers() {
+    when (query("select * from Player").count) {
+        0 -> {
+            listOf(ContentValues(2).apply {
+                put("id", ONE)
+                put("login", PLAYER_ONE_NAME)
+            }, ContentValues(2).apply {
+                put("id", TWO)
+                put("login", PLAYER_TWO_NAME)
+            }).forEach {
+                beginTransaction()
+                insert("Player", CONFLICT_FAIL, it)
+                setTransactionSuccessful()
+                endTransaction()
+                it.clear()
+            }
+        }
+    }
 }
