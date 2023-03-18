@@ -1,5 +1,6 @@
 package game.ceelo.entities
 
+import android.content.ContentValues
 import androidx.room.*
 import java.util.*
 
@@ -26,4 +27,10 @@ data class PlayerEntity(
         @Query("SELECT * FROM Player")
         fun all(): List<PlayerEntity>
     }
+
+    val contentValues
+        get() = ContentValues(2).apply {
+            put("id", id)
+            put("login", login)
+        }
 }

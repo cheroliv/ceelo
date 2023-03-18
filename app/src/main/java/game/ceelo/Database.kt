@@ -59,16 +59,14 @@ abstract class Database : RoomDatabase() {
         const val DB_NAME = "ceelo.db"
     }
 }
+
 fun SupportSQLiteDatabase.checkDefaultPlayers() {
     when (query("select * from Player").count) {
         0 -> {
-            listOf(ContentValues(2).apply {
-                put("id", ONE)
-                put("login", PLAYER_ONE_NAME)
-            }, ContentValues(2).apply {
-                put("id", TWO)
-                put("login", PLAYER_TWO_NAME)
-            }).forEach {
+            setOf(
+                PlayerEntity(ONE, PLAYER_ONE_NAME).contentValues,
+                PlayerEntity(TWO, PLAYER_TWO_NAME).contentValues,
+            ).forEach {
                 beginTransaction()
                 insert("Player", CONFLICT_FAIL, it)
                 setTransactionSuccessful()

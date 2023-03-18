@@ -20,6 +20,7 @@ import game.ceelo.Constant.TWO
 import game.ceelo.Game.runDices
 import game.ceelo.Playground.launchLocalGame
 import game.ceelo.R.id.player_one_first_dice
+import game.ceelo.entities.PlayerEntity
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -75,18 +76,15 @@ class CeeloServiceInstrumentedTest : KoinTest {
     }
 
     @Test
-    fun test_checkDefaultPlayers() {
-        get<Database>().playerDao().run {
-            assertEquals(NUMBER_PLAYERS, count())
-            all().run {
-                setOf(
-                    Pair(ONE, first().id),
-                    Pair(PLAYER_ONE_NAME, first().login),
-                    Pair(TWO, last().id),
-                    Pair(PLAYER_TWO_NAME, last().login),
-                ).forEach { (first, second) -> assertEquals(first, second) }
-            }
-        }
+    fun test_checkDefaultPlayers() = Pair(
+        listOf(
+            PlayerEntity(ONE, PLAYER_ONE_NAME),
+            PlayerEntity(TWO, PLAYER_TWO_NAME),
+        ), get<Database>().playerDao().all(),
+    ).run {
+        assertEquals(first.count(), second.count())
+        assertEquals(NUMBER_PLAYERS, second.count())
+        first.forEachIndexed { i, it -> assertEquals(it, second[i]) }
     }
 
     @Test
