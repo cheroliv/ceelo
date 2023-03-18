@@ -7,6 +7,7 @@ import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import game.ceelo.Game.runDices
 import game.ceelo.Game.secondPlayer
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.compareHands
@@ -83,7 +84,7 @@ fun GameViewModel.loadLocalGame(gameActivity: GameActivity) = gameActivity
 
 fun GameViewModel.onClickPlayButton() {
     //TODO: ici pour utiliser le service room
-    diceGame.value = listOf(Game.runDices(), Game.runDices())
+    diceGame.value = listOf(runDices(), runDices())
     ceeloService.saveGame(diceGame.value!!)
     resultVisibility.value = VISIBLE
     games.value = ceeloService.allGames()

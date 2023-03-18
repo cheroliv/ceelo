@@ -96,6 +96,7 @@ object AppDeps {
             "androidx.test.ext:junit" to ANDROIDX_JUNIT_VERSION,
             "io.insert-koin:koin-test" to KOIN_VERSION,
             "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
+            "androidx.room:room-testing" to ROOM_VERSION,
         )
     }
 

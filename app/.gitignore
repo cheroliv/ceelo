@@ -1,4 +1,4 @@
 /build
 /release/app-release.aab
 /debug/app-debug.aab
-schemas/game.ceelo.entities.CeeloDatabase/*.json
+schemas/game.ceelo.*/*.json

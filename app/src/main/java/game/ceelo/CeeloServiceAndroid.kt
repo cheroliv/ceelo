@@ -1,11 +1,11 @@
 package game.ceelo
 
-import game.ceelo.Game.runDices
 import game.ceelo.CeeloServiceAndroid.InMemoryData.addGame
 import game.ceelo.CeeloServiceAndroid.InMemoryData.getAllGames
+import game.ceelo.Game.runDices
 
 //TODO: add room, retrofit
-class CeeloServiceAndroid : CeeloService {
+class CeeloServiceAndroid(val dao: Database) : CeeloService {
     object InMemoryData {
         private val repo: MutableList<List<List<Int>>> by lazy {
             MutableList(size = 0,

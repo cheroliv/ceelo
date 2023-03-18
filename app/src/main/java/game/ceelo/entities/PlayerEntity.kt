@@ -16,5 +16,11 @@ data class PlayerEntity(
 ) {
 
     @Dao
-    interface PlayerDao
+    interface PlayerDao {
+//        @Query("SELECT * FROM Player p Where p.id = id")
+//        fun findOne(id:UUID): PlayerEntity
+
+        @Query("SELECT count(*) FROM Player")
+        fun count(): Long
+    }
 }
