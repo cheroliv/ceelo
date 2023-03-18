@@ -4,7 +4,6 @@ package game.ceelo
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase.CONFLICT_FAIL
-import android.util.Log.i
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import game.ceelo.Constant.ONE
