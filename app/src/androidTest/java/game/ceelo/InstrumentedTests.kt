@@ -42,7 +42,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(AndroidJUnit4::class)
-class CeeloServiceInstrumentedTest : KoinTest {
+class InstrumentedTests : KoinTest {
 
     @get:Rule
     val mockProvider by lazy { create { clazz -> mock(clazz.java) } }
