@@ -1,7 +1,10 @@
 package game.ceelo
 
 import android.app.Application
+import android.util.Log.i
 import androidx.room.Room.databaseBuilder
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import game.ceelo.Database.Companion.DB_NAME
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
@@ -12,7 +15,6 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.util.*
-
 
 class CeeLoApp : Application() {
 
@@ -40,14 +42,15 @@ class CeeLoApp : Application() {
                         Database::class.java,
                         DB_NAME
                     )
-//                        .addCallback(object : Callback() {
-//                            override fun onCreate(db: SupportSQLiteDatabase) {
-//                                super.onCreate(db)
-//                                Log.i("foobar", "baztux")
-//                                val playerCount = db.query("select * from Player").count
-//                                Log.i(CeeLoApp::class.java.simpleName, playerCount.toString())
-//                            }
-//                        })
+                        .addCallback(object : RoomDatabase.Callback() {
+                            override fun onCreate(db: SupportSQLiteDatabase) {
+                                super.onCreate(db)
+                                i("callback", "baztux")
+                                val playerCount = db.query("select * from Player").count
+                                i(CeeLoApp::class.java.simpleName, playerCount.toString())
+                                db.addDefaultPlayers()
+                            }
+                        })
 
                         .build()
                 }
@@ -63,13 +66,6 @@ class CeeLoApp : Application() {
 //                Log.i(CeeLoApp::class.java.simpleName, playerCount.toString())
 //            }
 //        }
-//     val buildDatabase
-//        get() = databaseBuilder(
-//            get(),
-//            Database::class.java,
-//            DB_NAME
-//        ).addCallback(databasePostConstruct)
-//            .build()
 
 
 }

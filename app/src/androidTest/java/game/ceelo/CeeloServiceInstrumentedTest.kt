@@ -60,22 +60,7 @@ class CeeloServiceInstrumentedTest : KoinTest {
                         i("foobar", "baztux")
                         val playerCount = db.query("select * from Player").count
                         i(CeeLoApp::class.java.simpleName, playerCount.toString())
-//            if (playerCount == 0) {
-//                db.run {
-//                    beginTransaction()
-//                    setOf(ContentValues().apply {
-//                        put("id", UUID.randomUUID().toString())
-//                        put("login", "user")
-//                    }, ContentValues().apply {
-//                        put("id", UUID.randomUUID().toString())
-//                        put("login", "computer")
-//                    }).map {
-//                        insert("Player", CONFLICT_FAIL, it)
-//                        it.clear()
-//                    }
-//                    endTransaction()
-//                }
-//            }
+                        db.addDefaultPlayers()
                     }
                 })
                 .build()
@@ -93,7 +78,7 @@ class CeeloServiceInstrumentedTest : KoinTest {
 
     @Test
     fun db_populate() {
-        i(CeeLoApp::class.java.simpleName, get<Database>().playerDao().count().toString())
+//        i(CeeLoApp::class.java.simpleName, get<Database>().playerDao().count().toString())
         assertEquals(0,get<Database>().playerDao().count().toInt())
 //        assertEquals(NUMBER_PLAYERS,get<Database>().playerDao().count().toInt())
     }

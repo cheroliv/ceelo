@@ -3,6 +3,7 @@
 package game.ceelo
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteDatabase
 import game.ceelo.Database.TypeUtils.fromDateTime
 import game.ceelo.Database.TypeUtils.toDateTime
 import game.ceelo.Database.TypesConverter
@@ -16,6 +17,8 @@ import java.time.Instant.ofEpochMilli
 import java.time.ZoneId.systemDefault
 import java.time.ZonedDateTime
 import java.util.*
+import android.util.Log.i
+
 
 
 @androidx.room.Database(
@@ -53,3 +56,23 @@ abstract class Database : RoomDatabase() {
     }
 }
 
+
+fun SupportSQLiteDatabase.addDefaultPlayers(){
+    i("populate database","addDefaultPlayers")
+    //            if (playerCount == 0) {
+//                db.run {
+//                    beginTransaction()
+//                    setOf(ContentValues().apply {
+//                        put("id", UUID.randomUUID().toString())
+//                        put("login", "user")
+//                    }, ContentValues().apply {
+//                        put("id", UUID.randomUUID().toString())
+//                        put("login", "computer")
+//                    }).map {
+//                        insert("Player", CONFLICT_FAIL, it)
+//                        it.clear()
+//                    }
+//                    endTransaction()
+//                }
+//            }
+}
