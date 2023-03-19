@@ -108,6 +108,8 @@ object AppDeps {
     @JvmStatic
     val testDeps by lazy {
         mapOf(
+            "org.jetbrains.kotlin:kotlin-test" to BLANK,
+            "org.jetbrains.kotlin:kotlin-test-junit" to BLANK,
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
             "androidx.room:room-testing" to ROOM_VERSION,
             "io.insert-koin:koin-test" to KOIN_VERSION,

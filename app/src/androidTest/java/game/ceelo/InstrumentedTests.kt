@@ -47,11 +47,11 @@ class InstrumentedTests : KoinTest {
     @get:Rule
     val mockProvider by lazy { create { clazz -> mock(clazz.java) } }
 
-    private val ceeloService: CeeloService by inject()
+    private val service: CeeloService by inject()
 
     private val database: Database by inject()
 
-    private val ceeloTest = module {
+    private val ceelo = module {
         singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
         viewModelOf(::GameViewModel)
         singleOf<Database> {
@@ -68,12 +68,12 @@ class InstrumentedTests : KoinTest {
     }
 
     @Before
-    fun initService() = loadKoinModules(ceeloTest)
+    fun initService() = loadKoinModules(ceelo)
 
     @After
     fun after() = database
         .close()
-        .also { unloadKoinModules(ceeloTest) }
+        .also { unloadKoinModules(ceelo) }
 
     @Test
     fun test_checkDefaultPlayers() = Pair(
@@ -112,7 +112,7 @@ class InstrumentedTests : KoinTest {
 
     @Test
     fun allGames_retourne_toutes_les_parties_et_sont_correct() =
-        ceeloService.allGames().forEach { game ->
+        service.allGames().forEach { game ->
             assertEquals(2, game.size)
             game.first().run {
                 assertEquals(CEELO_DICE_THROW_SIZE, size)
@@ -126,11 +126,11 @@ class InstrumentedTests : KoinTest {
 
     @Test
     fun saveGame_ajoute_une_partie() =
-        ceeloService
+        service
             .allGames()
             .size
             .run {
-                ceeloService.saveGame(listOf(runDices(), runDices()))
-                assertEquals(this + 1, ceeloService.allGames().size)
+                service.saveGame(listOf(runDices(), runDices()))
+                assertEquals(this + 1, service.allGames().size)
             }
 }

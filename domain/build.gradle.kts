@@ -6,6 +6,7 @@ import DomainDeps.domainTestDeps
 
 plugins {
     kotlin("jvm")
+    kotlin("plugin.serialization")
     id("java-library")
 }
 
