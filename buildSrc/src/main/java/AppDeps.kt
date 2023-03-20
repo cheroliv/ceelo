@@ -69,6 +69,7 @@ object AppDeps {
             "androidx.room:room-runtime" to ROOM_VERSION,
             "androidx.room:room-guava" to ROOM_VERSION,
             "androidx.room:room-paging" to ROOM_VERSION,
+            "androidx.lifecycle:lifecycle-runtime-ktx" to ANDROIDX_LIFECYCLE_VERSION,
             "androidx.lifecycle:lifecycle-viewmodel-ktx" to ANDROIDX_LIFECYCLE_VERSION,
             "androidx.lifecycle:lifecycle-livedata-ktx" to ANDROIDX_LIFECYCLE_VERSION,
             "androidx.lifecycle:lifecycle-common-java8" to ANDROIDX_LIFECYCLE_VERSION,

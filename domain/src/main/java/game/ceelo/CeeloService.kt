@@ -35,6 +35,11 @@ If banker lost all his money which is in the bank then game will start from step
 interface CeeloService {
     fun allGames(): List<List<List<Int>>>
     fun saveGame(newGame: List<List<Int>>)
-    fun connect()
-    fun subscribe()
+    suspend fun authenticate(login: String, password: String)
+}
+
+abstract class CeeloServiceKtor : CeeloService {
+    override suspend fun authenticate(login: String, password: String) {
+        TODO("Not yet implemented")
+    }
 }

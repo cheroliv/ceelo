@@ -22,11 +22,13 @@ class ClientTests {
     @Serializable
     data class IpResponse(val ip: String)
 
-    class ApiClient(engine: HttpClientEngine) {
-        private val httpClient = HttpClient(engine) {
+    class ApiClient(
+        @Suppress("MemberVisibilityCanBePrivate")
+        val engine: HttpClientEngine,
+        private val httpClient: HttpClient = HttpClient(engine) {
             install(ContentNegotiation) { json() }
         }
-
+    ) {
         suspend fun getIp(): IpResponse = httpClient
             .get("https://api.ipify.org/?format=json")
             .body()

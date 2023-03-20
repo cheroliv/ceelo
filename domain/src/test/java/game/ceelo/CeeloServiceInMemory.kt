@@ -4,7 +4,7 @@ import game.ceelo.Game.runDices
 import game.ceelo.CeeloServiceInMemory.InMemoryData.addGame
 import game.ceelo.CeeloServiceInMemory.InMemoryData.getAllGames
 
-class CeeloServiceInMemory : CeeloService {
+class CeeloServiceInMemory : CeeloServiceKtor() {
     private object InMemoryData {
         private val repo: MutableList<List<List<Int>>> by lazy {
             MutableList(0) { mutableListOf(runDices(), runDices()) }
@@ -21,11 +21,7 @@ class CeeloServiceInMemory : CeeloService {
 
     override fun allGames(): List<List<List<Int>>> = getAllGames()
     override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
-    override fun connect() {
-        TODO("Not yet implemented")
-    }
-
-    override fun subscribe() {
+    override suspend fun authenticate(login: String, password: String) {
         TODO("Not yet implemented")
     }
 }

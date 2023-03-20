@@ -4,7 +4,10 @@ package game.ceelo.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import game.ceelo.CeeloService
 import game.ceelo.databinding.ActivityLoginBinding.inflate
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import org.koin.android.ext.android.get
 
 class LoginActivity : AppCompatActivity() {
@@ -13,11 +16,13 @@ class LoginActivity : AppCompatActivity() {
         inflate(layoutInflater).apply {
             setContentView(root)
             login.setOnClickListener {
-                val authService = null
-                if (get<AuthentificationService>().login(
+                CoroutineScope(IO).launch {
+                    get<CeeloService>().authenticate(
                         username.text.toString(),
                         password.text.toString()
-                    )) finish()
+                    )
+                }
+                finish()
             }
         }
     }
