@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import game.ceelo.GameResult.*
 import game.ceelo.Hand.getDiceImageFromDiceValue
-import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityGameBinding
 import game.ceelo.databinding.ActivityGameBinding.inflate
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -19,16 +18,19 @@ class GameActivity : AppCompatActivity() {
         getViewModel<GameViewModel>().loadLocalGame(this)
     }
 }
+
 val GameActivity.binding: ActivityGameBinding
     get() = inflate(layoutInflater)
         .apply { setContentView(root) }
-val ActivityGameBinding.playerOneUI
+
+val ActivityGameBinding.playerOneUI: List<ImageView>
     get() = listOf(
         playerOneFirstDice,
         playerOneMiddleDice,
         playerOneLastDice
     )
-val ActivityGameBinding.playerTwoUI
+
+val ActivityGameBinding.playerTwoUI: List<ImageView>
     get() = listOf(
         playerTwoFirstDice,
         playerTwoMiddleDice,
@@ -37,7 +39,6 @@ val ActivityGameBinding.playerTwoUI
 
 val ActivityGameBinding.playersUI: List<List<ImageView>>
     get() = listOf(playerOneUI, playerTwoUI)
-
 
 
 val ActivityGameBinding.resultUI: List<TextView>
@@ -73,6 +74,3 @@ fun setTextViewResult(
         else -> RERUN.toString()
     }
 }
-
-
-
