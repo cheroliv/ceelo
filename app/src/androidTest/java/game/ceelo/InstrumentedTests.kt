@@ -51,7 +51,7 @@ class InstrumentedTests : KoinTest {
 
     private val database: Database by inject()
 
-    private val ceelo = module {
+    private val ceeloKoin = module {
         singleOf(::CeeloServiceAndroid) { bind<CeeloService>() }
         viewModelOf(::GameViewModel)
         singleOf<Database> {
@@ -62,27 +62,26 @@ class InstrumentedTests : KoinTest {
                         super.onCreate(db)
                         assertEquals(0, db.query("select * from Player").count)
                         db.checkDefaultPlayers()
+                        assertEquals(NUMBER_PLAYERS, db.query("select * from Player").count)
                     }
                 }).build()
         }
     }
 
     @Before
-    fun initService() = loadKoinModules(ceelo)
+    fun initService() = loadKoinModules(ceeloKoin)
 
     @After
     fun after() = database
         .close()
-        .also { unloadKoinModules(ceelo) }
+        .also { unloadKoinModules(ceeloKoin) }
 
     @Test
-    fun test_checkDefaultPlayers() = Pair(
-        listOf(
-            PlayerEntity(ONE, PLAYER_ONE_NAME),
-            PlayerEntity(TWO, PLAYER_TWO_NAME),
-        ),
-        get<Database>().playerDao().all(),
-    ).run {
+    fun test_checkDefaultPlayers() = (listOf(
+        ONE to PLAYER_ONE_NAME,
+        TWO to PLAYER_TWO_NAME
+    ).map { PlayerEntity(it.first, it.second) }
+            to get<Database>().playerDao().all()).run {
         assertEquals(first.count(), second.count())
         assertEquals(NUMBER_PLAYERS, second.count())
         first.forEachIndexed { i, it -> assertEquals(it, second[i]) }
