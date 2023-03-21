@@ -1,5 +1,6 @@
 package game.ceelo
 
+import game.ceelo.CeeLoApp.Database
 import game.ceelo.CeeloServiceAndroid.InMemoryData.addGame
 import game.ceelo.CeeloServiceAndroid.InMemoryData.getAllGames
 import game.ceelo.Game.runDices
