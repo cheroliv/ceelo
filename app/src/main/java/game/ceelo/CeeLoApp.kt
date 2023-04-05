@@ -50,8 +50,10 @@ class CeeLoApp : Application() {
                         DB_NAME
                     ).addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            db.checkDefaultPlayers()
+                            db.run {
+                                super.onCreate(this)
+                                checkDefaultPlayers()
+                            }
                         }
                     }).build()
                 }
