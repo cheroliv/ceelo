@@ -1,0 +1,42 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName CeeloApp
+    blueprints []
+    buildTool gradle
+    cacheProvider no
+    clientFramework react
+    clientPackageManager npm
+    clientTheme superhero
+    clientThemeVariant dark
+    creationTimestamp 1672599040468
+    databaseType sql
+    devDatabaseType h2Memory
+    dtoSuffix Dto
+    enableGradleEnterprise false
+    enableHibernateCache false
+    enableSwaggerCodegen false
+    enableTranslation true
+    gradleEnterpriseHost ""
+    jhiPrefix jhi
+    jhipsterVersion "7.9.3"
+    jwtSecretKey "YmJjNTU1ZGE2ZTMxNTdiNmJmNmE2MDI5NGQ2NTczNzNmN2MzZjM4MGQ1YjY1Yzk5ZTlmN2M4ZDBjYzA2ZTdhY2Y4M2FkZmQ0OTBkMzZkZmIzMDUyZDI4NWZjZWZiYzVkMjE3ZjgzYTA0NmJjZGI5ZjA3YWIwNWRiN2Q5MmQwNTA="
+    languages [fr, en]
+    messageBroker false
+    microfrontend false
+    microfrontends []
+    nativeLanguage fr
+    otherModules []
+    packageName com.cheroliv.ceelo.webapp
+    prodDatabaseType postgresql
+    reactive true
+    searchEngine false
+    serverPort 8080
+    serviceDiscoveryType no
+    skipClient false
+    skipUserManagement false
+    websocket false
+    withAdminUi true
+  }
+}

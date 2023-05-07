@@ -1,0 +1,14 @@
+*.iml
+.gradle
+.DS_Store
+build
+captures
+.externalNativeBuild
+.cxx
+local.properties
+ceelo.code-workspace
+gradle/wrapper/gradle-wrapper.jar
+/.idea/
+/data/
+webapp.tar
+jhipster-kotlin-manager.code-workspace

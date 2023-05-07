@@ -1,0 +1,31 @@
+{
+  "health": {
+    "title": "Pengecekan Kesehatan Aplikasi",
+    "refresh.button": "Muat ulang",
+    "stacktrace": "Stacktrace",
+    "details": {
+      "details": "Detail",
+      "properties": "Properties",
+      "name": "Nama",
+      "value": "Nilai",
+      "error": "Error"
+    },
+    "indicator": {
+      "diskSpace": "Ukuran disk",
+      "mail": "Email",
+      "livenessState": "Liveness state",
+      "readinessState": "Readiness state",
+      "ping": "Application",
+      "r2dbc": "Database"
+    },
+    "table": {
+      "service": "Nama Service",
+      "status": "Status"
+    },
+    "status": {
+      "UNKNOWN": "UNKNOWN",
+      "UP": "BAIK",
+      "DOWN": "BERMASALAH"
+    }
+  }
+}
