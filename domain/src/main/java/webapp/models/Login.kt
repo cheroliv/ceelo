@@ -14,3 +14,14 @@ data class Login(
     val password: String? = null,
     val rememberMe: Boolean? = null,
 )
+/*
+LoginVM{
+    username*	string
+    maxLength: 50
+    minLength: 1
+    password*	string
+    maxLength: 100
+    minLength: 4
+    rememberMe	boolean
+}
+ */

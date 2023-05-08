@@ -38,3 +38,4 @@ interface CeeloService {
     suspend fun authenticate(login: String, password: String)
 }
 
+

@@ -14,7 +14,7 @@ import java.util.*
  * pour la vue
  */
 data class AccountCredentials(
-    val id: UUID? = null,
+    val id: Long? = null,
 //    @field:Size(min = PASSWORD_MIN, max = PASSWORD_MAX)
 //    @field:NotNull
     val password: String? = null,
@@ -82,6 +82,63 @@ data class AccountCredentials(
             authorities = authorities
         )
 }
+//register
+// Code	Description
+//201 Created
+/*
+{
+  "id": 0,
+  "login": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "imageUrl": "string",
+  "activated": true,
+  "langKey": "string",
+  "createdBy": "string",
+  "createdDate": "2023-05-07T15:52:49.651Z",
+  "lastModifiedBy": "string",
+  "lastModifiedDate": "2023-05-07T15:52:49.651Z",
+  "authorities": [
+    "string"
+  ],
+  "password": "string"
+}
+ */
+/*
+ManagedUserVM{
+    id	integer($int64)
+    login*	string
+    maxLength: 50
+    minLength: 1
+    pattern: ^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$
+    firstName	string
+    maxLength: 50
+    minLength: 0
+    lastName	string
+    maxLength: 50
+    minLength: 0
+    email	string
+    maxLength: 254
+    minLength: 5
+    imageUrl	string
+    maxLength: 256
+    minLength: 0
+    activated	boolean
+    langKey	string
+    maxLength: 10
+    minLength: 2
+    createdBy	string
+    createdDate	string($date-time)
+    lastModifiedBy	string
+    lastModifiedDate	string($date-time)
+    authorities	        [ uniqueItems: true
+                            string]
+    password	string
+    maxLength: 100
+    minLength: 4
+}
+*/
 
 
 

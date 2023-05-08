@@ -5,14 +5,13 @@ package webapp.models
 //import jakarta.validation.constraints.Pattern
 //import jakarta.validation.constraints.Size
 import java.time.Instant
-import java.util.*
 
 /**
  * Représente l'account domain model sans le password
  */
 //TODO: add field enabled=false
 data class Account(
-    val id: UUID? = null,
+    val id: Long? = null,
 //    @field:NotBlank
 //    @field:Pattern(regexp = LOGIN_REGEX)
 //    @field:Size(min = 1, max = 50)
@@ -38,4 +37,40 @@ data class Account(
     fun isActivated() = activated
     val toAvatar get() = Avatar(id = id, login = login)
 }
+/*
+   val toModel: Account
+        get() = Account(
+            id = id,
+            login = login,
+            firstName = firstName,
+            lastName = lastName,
+            email = email,
+            imageUrl = imageUrl,
+            activated = activated,
+            langKey = langKey,
+            createdBy = createdBy,
+            createdDate = createdDate,
+            lastModifiedBy = lastModifiedBy,
+            lastModifiedDate = lastModifiedDate,
+            authorities = authorities?.map { it.role }?.toSet()
+        )
 
+    val toCredentialsModel: AccountCredentials
+        get() = AccountCredentials(
+            id = id,
+            login = login,
+            firstName = firstName,
+            lastName = lastName,
+            email = email,
+            password = password,
+            activationKey = activationKey,
+            imageUrl = imageUrl,
+            activated = activated,
+            langKey = langKey,
+            createdBy = createdBy,
+            createdDate = createdDate,
+            lastModifiedBy = lastModifiedBy,
+            lastModifiedDate = lastModifiedDate,
+            authorities = authorities?.map { it.role }?.toSet()
+        )
+*/
