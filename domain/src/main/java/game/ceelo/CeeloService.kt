@@ -2,6 +2,9 @@
 
 package game.ceelo
 
+import webapp.models.JwtToken
+import webapp.models.ProblemsModel
+
 /**
 
 RULES
@@ -35,7 +38,5 @@ If banker lost all his money which is in the bank then game will start from step
 interface CeeloService {
     fun allGames(): List<List<List<Int>>>
     fun saveGame(newGame: List<List<Int>>)
-    suspend fun authenticate(login: String, password: String)
+    suspend fun authenticate(login: String, password: String):Pair<ProblemsModel,JwtToken>
 }
-
-

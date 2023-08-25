@@ -13,6 +13,12 @@ plugins {
 dependencies {
     domainDeps.forEach { implementation(dependency(it)) }
     domainTestDeps.forEach { testImplementation(dependency(it)) }
+//    setOf("io.arrow-kt:arrow-core:1.2.0-RC",
+//        "io.arrow-kt:arrow-fx-coroutines:1.2.0-RC").map{
+//        implementation(it){
+//            exclude(group="kotlin-stdlib")
+//        }
+//    }
 }
 
 java {

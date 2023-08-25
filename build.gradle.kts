@@ -15,10 +15,13 @@ buildscript {
 plugins {
     kotlin("jvm") version Versions.kotlin_version apply false
     kotlin("android") version Versions.kotlin_version apply false
+    kotlin("plugin.serialization") version Versions.kotlin_version apply false
     id("com.android.application") version Versions.android_app_version apply false
     id("com.android.library") version Versions.android_lib_version apply false
-    kotlin("plugin.serialization") version Versions.kotlin_version apply false
+    idea
 }
+/*=================================================================================*/
+idea.module.excludeDirs.plusAssign(files("node_modules"))
 /*=================================================================================*/
 tasks.register<Delete>("clean") {
     description = "Delete directory build"

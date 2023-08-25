@@ -7,6 +7,8 @@ object DomainDeps {
     const val KOIN_VERSION = "koin_version"
     const val KTOR_VERSION = "ktor_version"
     const val LOGBACK_VERSION = "logback_version"
+    const val ARROW_KT_VERSION = "arrow-kt_version"
+
 
     @JvmStatic
     val domainDeps by lazy {
@@ -16,6 +18,7 @@ object DomainDeps {
             "io.ktor:ktor-client-cio" to KTOR_VERSION,
             "io.ktor:ktor-client-content-negotiation" to KTOR_VERSION,
             "io.ktor:ktor-serialization-kotlinx-json" to KTOR_VERSION,
+
         )
     }
 

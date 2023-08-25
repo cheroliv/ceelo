@@ -22,6 +22,9 @@ plugins {
 dependencies {
     implementation(project(":domain"))
     androidDependencies()
+//    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
+//    implementation("io.arrow-kt:arrow-core")
+//    implementation("io.arrow-kt:arrow-fx-coroutines")
 }
 /*=================================================================================*/
 android {

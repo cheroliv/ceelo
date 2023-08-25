@@ -16,6 +16,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ceelo"
+rootProject.name = "ceelo-legacy"
 include (":app")
 include (":domain")

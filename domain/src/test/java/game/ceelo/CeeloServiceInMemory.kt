@@ -3,6 +3,8 @@ package game.ceelo
 import game.ceelo.Game.runDices
 import game.ceelo.CeeloServiceInMemory.InMemoryData.addGame
 import game.ceelo.CeeloServiceInMemory.InMemoryData.getAllGames
+import webapp.models.JwtToken
+import webapp.models.ProblemsModel
 
 class CeeloServiceInMemory : CeeloServiceKtor() {
     private object InMemoryData {
@@ -21,7 +23,7 @@ class CeeloServiceInMemory : CeeloServiceKtor() {
 
     override fun allGames(): List<List<List<Int>>> = getAllGames()
     override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
-    override suspend fun authenticate(login: String, password: String) {
+    override suspend fun authenticate(login: String, password: String): Pair<ProblemsModel, JwtToken> {
         TODO("Not yet implemented")
     }
 }

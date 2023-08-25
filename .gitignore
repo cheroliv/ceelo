@@ -10,4 +10,4 @@ ceelo.code-workspace
 gradle/wrapper/gradle-wrapper.jar
 /.idea/
 /data/
-webapp.tar
+*.tar

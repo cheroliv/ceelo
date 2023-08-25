@@ -36,7 +36,7 @@ class ClientTests {
 
     @Test
     fun testMockServer() = runBlocking {
-        assertEquals("127.0.0.1", ApiClient(MockEngine {
+        assertEquals("127.0.0.1", ApiClient(engine = MockEngine {
             respond(
                 content = ByteReadChannel("""{"ip":"127.0.0.1"}"""),
                 status = OK,
