@@ -18,4 +18,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ceelo-legacy"
 include (":app")
-include (":domain")
