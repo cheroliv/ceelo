@@ -1,4 +1,3 @@
-//import Build_gradle.BuildDeps.KOTLIN_VERSION
 import Build_gradle.AppConfig.androidTestInstrumentation
 import Build_gradle.AppConfig.appId
 import Build_gradle.AppConfig.currentCompileSdk
@@ -8,21 +7,22 @@ import Build_gradle.AppConfig.minSdkVersion
 import Build_gradle.AppConfig.proguardFile
 import Build_gradle.AppConfig.proguardRules
 import Build_gradle.AppConfig.targetSdkVersion
+import Build_gradle.AppDeps.ANDROIDX_ARCH_CORE_VERSION
+import Build_gradle.AppDeps.ANDROIDX_CORE_VERSION
+import Build_gradle.AppDeps.ANDROIDX_JUNIT_VERSION
+import Build_gradle.AppDeps.ANDROIDX_LIFECYCLE_VERSION
+import Build_gradle.AppDeps.APP_COMPAT_VERSION
+import Build_gradle.AppDeps.CONSTRAINT_LAYOUT_VERSION
+import Build_gradle.AppDeps.ESPRESSO_VERSION
+import Build_gradle.AppDeps.KOIN_ANDROID_VERSION
+import Build_gradle.AppDeps.KOTLINX_COROUTINES_VERSION
+import Build_gradle.AppDeps.KOTLIN_VERSION
+import Build_gradle.AppDeps.MATERIAL_VERSION
 import Build_gradle.AppDeps.MOCKITO_KOTLIN_VERSION
+import Build_gradle.AppDeps.NAV_VERSION
 import Build_gradle.AppDeps.ROOM_VERSION
-import Build_gradle.AppDeps.androidDeps
-import Build_gradle.AppDeps.androidTestDeps
-import Build_gradle.AppDeps.androidTestImplementation
-import Build_gradle.AppDeps.annotationProcessor
-import Build_gradle.AppDeps.annotationProcessorDeps
-import Build_gradle.AppDeps.implementation
-import Build_gradle.AppDeps.kapt
-import Build_gradle.AppDeps.kaptDeps
-import Build_gradle.AppDeps.testAnnotationProcessor
-import Build_gradle.AppDeps.testAnnotationProcessorDeps
-import Build_gradle.AppDeps.testDeps
-import Build_gradle.AppDeps.testImplementation
-import Build_gradle.Constants.BLANK
+import Build_gradle.DomainDeps.KOIN_VERSION
+import Build_gradle.DomainDeps.KTOR_VERSION
 import org.gradle.api.JavaVersion.VERSION_1_8
 
 /*=================================================================================*/
@@ -32,60 +32,6 @@ plugins {
     id("androidx.navigation.safeargs")
     id("kotlin-kapt")
     id("com.github.triplet.play")
-}
-/*=================================================================================*/
-dependencies {
-    implementation("io.insert-koin:koin-core:${properties[DomainDeps.KOIN_VERSION]}")
-    implementation("io.ktor:ktor-client-core:${properties[DomainDeps.KTOR_VERSION]}")
-    implementation("io.ktor:ktor-client-cio:${properties[DomainDeps.KTOR_VERSION]}")
-    implementation("io.ktor:ktor-client-content-negotiation:${properties[DomainDeps.KTOR_VERSION]}")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:${properties[DomainDeps.KTOR_VERSION]}")
-
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:${properties[MOCKITO_KOTLIN_VERSION]}")
-    testImplementation("io.insert-koin:koin-test:${properties[DomainDeps.KOIN_VERSION]}")
-    testImplementation("io.insert-koin:koin-test-junit4:${properties[DomainDeps.KOIN_VERSION]}")
-    testImplementation("io.ktor:ktor-client-mock:${properties[DomainDeps.KTOR_VERSION]}")
-    testImplementation("ch.qos.logback:logback-classic:${properties[DomainDeps.LOGBACK_VERSION]}")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("androidx.room:room-testing:${properties[ROOM_VERSION]}")
-
-    testAnnotationProcessor("androidx.room:room-compiler:${properties[ROOM_VERSION]}")
-
-    kapt("androidx.room:room-compiler:${properties[ROOM_VERSION]}")
-
-    AppDeps.appModules.forEach { module ->
-        module.value.forEach {
-            when (it.key) {
-                "androidx.test.espresso:espresso-core" ->
-                    dependencies.add(module.key, it.run {
-                        key + when (value) {
-                            null -> BLANK
-                            BLANK -> BLANK
-                            else -> ":${properties[value]}"
-                        }
-                    }) {
-                        exclude(
-                            "com.android.support",
-                            "support-annotations"
-                        )
-                    }
-
-                else -> dependencies.add(module.key, it.run {
-                    key + when (value) {
-                        null -> BLANK
-                        BLANK -> BLANK
-                        else -> ":${properties[value]}"
-                    }
-                })
-            }
-        }
-    }
-//    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
-//    implementation("io.arrow-kt:arrow-core")
-//    implementation("io.arrow-kt:arrow-fx-coroutines")
 }
 /*=================================================================================*/
 android {
@@ -121,16 +67,82 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 /*=================================================================================*/
+dependencies {
+//    implementation(platform("io.arrow-kt:arrow-stack:1.2.0-RC"))
+//    implementation("io.arrow-kt:arrow-core")
+//    implementation("io.arrow-kt:arrow-fx-coroutines")
 
+    implementation("io.insert-koin:koin-core:${properties[KOIN_VERSION]}")
+    //TODO: https://blog.devgenius.io/out-with-retrofit-and-in-with-ktor-client-e8b52f205139
+    implementation("io.ktor:ktor-client-core:${properties[KTOR_VERSION]}")
+    implementation("io.ktor:ktor-client-cio:${properties[KTOR_VERSION]}")
+    implementation("io.ktor:ktor-client-content-negotiation:${properties[KTOR_VERSION]}")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:${properties[KTOR_VERSION]}")
+//            "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
+//            "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
+
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:${properties[MOCKITO_KOTLIN_VERSION]}")
+    testImplementation("io.insert-koin:koin-test:${properties[KOIN_VERSION]}")
+    testImplementation("io.insert-koin:koin-test-junit4:${properties[KOIN_VERSION]}")
+    testImplementation("io.ktor:ktor-client-mock:${properties[KTOR_VERSION]}")
+    testImplementation("ch.qos.logback:logback-classic:${properties[DomainDeps.LOGBACK_VERSION]}")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation("androidx.room:room-testing:${properties[ROOM_VERSION]}")
+
+    testAnnotationProcessor("androidx.room:room-compiler:${properties[ROOM_VERSION]}")
+
+    kapt("androidx.room:room-compiler:${properties[ROOM_VERSION]}")
+
+
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    androidTestImplementation("androidx.test.ext:junit:${properties[ANDROIDX_JUNIT_VERSION]}")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:${properties[MOCKITO_KOTLIN_VERSION]}")
+    androidTestImplementation("androidx.navigation:navigation-testing:${properties[NAV_VERSION]}")
+    androidTestImplementation("androidx.arch.core:core-testing:${properties[ANDROIDX_ARCH_CORE_VERSION]}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${properties[ESPRESSO_VERSION]}") {
+        exclude("com.android.support", "support-annotations")
+    }
+    androidTestImplementation("io.insert-koin:koin-test:${properties[KOIN_ANDROID_VERSION]}")
+    androidTestImplementation("io.insert-koin:koin-test-junit4:${properties[KOIN_VERSION]}")
+    androidTestImplementation("androidx.room:room-testing:${properties[ROOM_VERSION]}")
+    androidTestImplementation("io.ktor:ktor-client-mock:${properties[KTOR_VERSION]}")
+
+
+    implementation("androidx.core:core-ktx:${properties[ANDROIDX_CORE_VERSION]}")
+    implementation("androidx.appcompat:appcompat:${properties[APP_COMPAT_VERSION]}")
+    implementation("com.google.android.material:material:${properties[MATERIAL_VERSION]}")
+    implementation("androidx.constraintlayout:constraintlayout:${properties[CONSTRAINT_LAYOUT_VERSION]}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${properties[KOTLINX_COROUTINES_VERSION]}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${properties[KOTLINX_COROUTINES_VERSION]}")
+    implementation("androidx.navigation:navigation-fragment-ktx:${properties[NAV_VERSION]}")
+    implementation("androidx.navigation:navigation-ui-ktx:${properties[NAV_VERSION]}")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:${properties[NAV_VERSION]}")
+    implementation("androidx.room:room-runtime:${properties[ROOM_VERSION]}")
+    implementation("androidx.room:room-guava:${properties[ROOM_VERSION]}")
+    implementation("androidx.room:room-paging:${properties[ROOM_VERSION]}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${properties[ANDROIDX_LIFECYCLE_VERSION]}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${properties[ANDROIDX_LIFECYCLE_VERSION]}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${properties[ANDROIDX_LIFECYCLE_VERSION]}")
+    implementation("androidx.lifecycle:lifecycle-common-java8:${properties[ANDROIDX_LIFECYCLE_VERSION]}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${properties[KOTLIN_VERSION]}")
+    implementation("androidx.constraintlayout:constraintlayout:${properties[CONSTRAINT_LAYOUT_VERSION]}")
+    implementation("com.google.android.material:material:${properties[MATERIAL_VERSION]}")
+    implementation("io.insert-koin:koin-core:${properties[KOIN_VERSION]}")
+    implementation("io.insert-koin:koin-android:${properties[KOIN_ANDROID_VERSION]}")
+    implementation("io.insert-koin:koin-androidx-workmanager:${properties[KOIN_ANDROID_VERSION]}")
+    implementation("io.insert-koin:koin-androidx-navigation:${properties[KOIN_ANDROID_VERSION]}")
+
+}
+/*=================================================================================*/
 object Versions {
     const val android_app_version = "7.2.1"
     const val android_lib_version = "7.3.1"
     const val kotlin_version = "1.7.20"
 }
-
-/*=================================================================================*/
-
-
 /*=================================================================================*/
 object Constants {
 
@@ -138,7 +150,6 @@ object Constants {
     const val DELIM = ","
 }
 /*=================================================================================*/
-
 object AppConfig {
     const val currentCompileSdk = 33
     const val minSdkVersion = 26
@@ -151,7 +162,6 @@ object AppConfig {
     const val proguardRules = "proguard-rules.pro"
 }
 /*=================================================================================*/
-
 object DomainDeps {
     const val KOIN_VERSION = "koin_version"
     const val KTOR_VERSION = "ktor_version"
@@ -160,7 +170,6 @@ object DomainDeps {
 
 }
 /*=================================================================================*/
-
 object AppDeps {
     const val androidTestImplementation = "androidTestImplementation"
     const val implementation = "implementation"
@@ -168,7 +177,7 @@ object AppDeps {
     const val kapt = "kapt"
     const val annotationProcessor = "annotationProcessor"
     const val testAnnotationProcessor = "testAnnotationProcessor"
-
+    const val KOTLIN_VERSION = "kotlin_version"
     const val ROOM_VERSION = "room_version"
     const val ANDROIDX_CORE_VERSION = "androidx_core_version"
     const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
@@ -183,72 +192,5 @@ object AppDeps {
     const val ANDROIDX_ARCH_CORE_VERSION = "androidx_arch_core_version"
     const val APP_COMPAT_VERSION = "app_compat_version"
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
-
-    @JvmStatic
-    val appModules by lazy {
-        mapOf(
-            implementation to androidDeps,
-            testImplementation to testDeps,
-            androidTestImplementation to androidTestDeps,
-            kapt to kaptDeps,
-            annotationProcessor to annotationProcessorDeps,
-            testAnnotationProcessor to testAnnotationProcessorDeps,
-        )
-    }
-
-
-    @JvmStatic
-    val androidDeps by lazy {
-        mapOf(
-            "androidx.core:core-ktx" to ANDROIDX_CORE_VERSION,
-            "androidx.appcompat:appcompat" to APP_COMPAT_VERSION,
-            "com.google.android.material:material" to MATERIAL_VERSION,
-            "androidx.constraintlayout:constraintlayout" to CONSTRAINT_LAYOUT_VERSION,
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core" to KOTLINX_COROUTINES_VERSION,
-            "org.jetbrains.kotlinx:kotlinx-coroutines-android" to KOTLINX_COROUTINES_VERSION,
-            "androidx.navigation:navigation-fragment-ktx" to NAV_VERSION,
-            "androidx.navigation:navigation-ui-ktx" to NAV_VERSION,
-            "androidx.navigation:navigation-dynamic-features-fragment" to NAV_VERSION,
-            "androidx.room:room-runtime" to ROOM_VERSION,
-            "androidx.room:room-guava" to ROOM_VERSION,
-            "androidx.room:room-paging" to ROOM_VERSION,
-            "androidx.lifecycle:lifecycle-runtime-ktx" to ANDROIDX_LIFECYCLE_VERSION,
-            "androidx.lifecycle:lifecycle-viewmodel-ktx" to ANDROIDX_LIFECYCLE_VERSION,
-            "androidx.lifecycle:lifecycle-livedata-ktx" to ANDROIDX_LIFECYCLE_VERSION,
-            "androidx.lifecycle:lifecycle-common-java8" to ANDROIDX_LIFECYCLE_VERSION,
-            "org.jetbrains.kotlin:kotlin-stdlib-jdk7" to KOTLIN_VERSION,
-            "androidx.constraintlayout:constraintlayout" to CONSTRAINT_LAYOUT_VERSION,
-            "com.google.android.material:material" to MATERIAL_VERSION,
-            "io.insert-koin:koin-core" to KOIN_VERSION,
-            "io.insert-koin:koin-android" to KOIN_ANDROID_VERSION,
-            "io.insert-koin:koin-androidx-workmanager" to KOIN_ANDROID_VERSION,
-            "io.insert-koin:koin-androidx-navigation" to KOIN_ANDROID_VERSION,
-//            "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
-//            "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
-//TODO: https://blog.devgenius.io/out-with-retrofit-and-in-with-ktor-client-e8b52f205139
-            "io.ktor:ktor-client-core" to KTOR_VERSION,
-            "io.ktor:ktor-client-cio" to KTOR_VERSION,
-        )
-    }
-
-    @JvmStatic
-    val androidTestDeps by lazy {
-        mapOf(
-            "org.jetbrains.kotlin:kotlin-test" to BLANK,
-            "org.jetbrains.kotlin:kotlin-test-junit" to BLANK,
-            "androidx.test.ext:junit" to ANDROIDX_JUNIT_VERSION,
-            "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
-            "androidx.navigation:navigation-testing" to NAV_VERSION,
-            "androidx.arch.core:core-testing" to ANDROIDX_ARCH_CORE_VERSION,
-            "androidx.test.espresso:espresso-core" to ESPRESSO_VERSION,
-            "androidx.test.ext:junit" to ANDROIDX_JUNIT_VERSION,
-            "io.insert-koin:koin-test" to KOIN_VERSION,
-            "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
-            "androidx.room:room-testing" to ROOM_VERSION,
-            "io.ktor:ktor-client-mock" to KTOR_VERSION,
-        )
-    }
 }
-
-
 /*=================================================================================*/

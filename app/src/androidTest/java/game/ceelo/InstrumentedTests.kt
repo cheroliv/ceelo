@@ -11,6 +11,7 @@ import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import game.ceelo.CeeLoApp.Companion.NUMBER_PLAYERS
+import game.ceelo.CeeLoApp.Database
 import game.ceelo.Constant.CEELO_DICE_THROW_SIZE
 import game.ceelo.Constant.ONE
 import game.ceelo.Constant.PLAYER_ONE_NAME

@@ -85,7 +85,8 @@ class CeeLoApp : Application() {
         }
 
         object TypeUtils {
-            val ZonedDateTime.fromDateTime: Long? get() = toInstant()?.toEpochMilli()
+            val ZonedDateTime.fromDateTime: Long?
+                get() = toInstant()?.toEpochMilli()
             val Long.toDateTime: ZonedDateTime?
                 get() = ofEpochMilli(this)
                     .atZone(systemDefault())
