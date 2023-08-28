@@ -10,12 +10,9 @@ import Build_gradle.AppDeps.ESPRESSO_VERSION
 import Build_gradle.AppDeps.KOIN_ANDROID_VERSION
 import Build_gradle.AppDeps.KOTLINX_COROUTINES_VERSION
 import Build_gradle.AppDeps.KOTLIN_VERSION
-import Build_gradle.AppDeps.KTOR_VERSION
-import Build_gradle.AppDeps.LOGBACK_VERSION
 import Build_gradle.AppDeps.MATERIAL_VERSION
 import Build_gradle.AppDeps.MOCKITO_KOTLIN_VERSION
 import Build_gradle.AppDeps.NAV_VERSION
-import Build_gradle.AppDeps.ROOM_VERSION
 import org.gradle.api.JavaVersion.VERSION_1_8
 
 /*=================================================================================*/
@@ -80,7 +77,6 @@ object AppDeps {
 //    coroutines_version=1.3.9
 //    lifecycle_version=2.4.1
 //    material_version=1.7.0
-//    room_version=2.4.3
 //    espresso_version=3.4.0
 //    androidx_junit_version=1.1.4
 //    koin_android_version=3.3.0
@@ -95,7 +91,6 @@ object AppDeps {
 
 
     const val KOTLIN_VERSION = "kotlin_version"
-    const val ROOM_VERSION = "room_version"
     const val ANDROIDX_CORE_VERSION = "androidx_core_version"
     const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
     const val NAV_VERSION = "nav_version"
@@ -111,8 +106,6 @@ object AppDeps {
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
 
-    const val KTOR_VERSION = "ktor_version"//2.2.4
-    const val LOGBACK_VERSION = "logback_version"//1.3.6
     const val ARROW_KT_VERSION = "arrow-kt_version"
 }
 /*=================================================================================*/
@@ -126,27 +119,27 @@ dependencies {
 
     implementation("io.insert-koin:koin-core:3.2.2")
     //TODO: https://blog.devgenius.io/out-with-retrofit-and-in-with-ktor-client-e8b52f205139
-    implementation("io.ktor:ktor-client-core:".dep(KTOR_VERSION))
-    implementation("io.ktor:ktor-client-cio:".dep(KTOR_VERSION))
-    implementation("io.ktor:ktor-client-content-negotiation:".dep(KTOR_VERSION))
-    implementation("io.ktor:ktor-serialization-kotlinx-json:".dep(KTOR_VERSION))
+    implementation("io.ktor:ktor-client-core:2.2.4")
+    implementation("io.ktor:ktor-client-cio:2.2.4")
+    implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
 //            "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
 //            "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:".dep(MOCKITO_KOTLIN_VERSION))
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     testImplementation("io.insert-koin:koin-test:3.2.2")
     testImplementation("io.insert-koin:koin-test-junit4:3.2.2")
-    testImplementation("io.ktor:ktor-client-mock:".dep(KTOR_VERSION))
-    testImplementation("ch.qos.logback:logback-classic:".dep(LOGBACK_VERSION))
+    testImplementation("io.ktor:ktor-client-mock:2.2.4")
+    testImplementation("ch.qos.logback:logback-classic:1.3.6")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("androidx.room:room-testing:".dep(ROOM_VERSION))
+    testImplementation("androidx.room:room-testing:2.4.3")
 
-    testAnnotationProcessor("androidx.room:room-compiler:".dep(ROOM_VERSION))
+    testAnnotationProcessor("androidx.room:room-compiler:2.4.3")
 
-    kapt("androidx.room:room-compiler:".dep(ROOM_VERSION))
+    kapt("androidx.room:room-compiler:2.4.3")
 
 
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
@@ -160,8 +153,8 @@ dependencies {
     }
     androidTestImplementation("io.insert-koin:koin-test:".dep(KOIN_ANDROID_VERSION))
     androidTestImplementation("io.insert-koin:koin-test-junit4:3.2.2")
-    androidTestImplementation("androidx.room:room-testing:".dep(ROOM_VERSION))
-    androidTestImplementation("io.ktor:ktor-client-mock:".dep(KTOR_VERSION))
+    androidTestImplementation("androidx.room:room-testing:2.4.3")
+    androidTestImplementation("io.ktor:ktor-client-mock:2.2.4")
 
 
     implementation("androidx.core:core-ktx:".dep(ANDROIDX_CORE_VERSION))
@@ -173,9 +166,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:".dep(NAV_VERSION))
     implementation("androidx.navigation:navigation-ui-ktx:".dep(NAV_VERSION))
     implementation("androidx.navigation:navigation-dynamic-features-fragment:".dep(NAV_VERSION))
-    implementation("androidx.room:room-runtime:".dep(ROOM_VERSION))
-    implementation("androidx.room:room-guava:".dep(ROOM_VERSION))
-    implementation("androidx.room:room-paging:".dep(ROOM_VERSION))
+    implementation("androidx.room:room-runtime:2.4.3")
+    implementation("androidx.room:room-guava:2.4.3")
+    implementation("androidx.room:room-paging:2.4.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:".dep(ANDROIDX_LIFECYCLE_VERSION))
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:".dep(ANDROIDX_LIFECYCLE_VERSION))
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:".dep(ANDROIDX_LIFECYCLE_VERSION))
