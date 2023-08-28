@@ -1,18 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import Build_gradle.AppDeps.ANDROIDX_ARCH_CORE_VERSION
-import Build_gradle.AppDeps.ANDROIDX_CORE_VERSION
-import Build_gradle.AppDeps.ANDROIDX_JUNIT_VERSION
-import Build_gradle.AppDeps.ANDROIDX_LIFECYCLE_VERSION
-import Build_gradle.AppDeps.APP_COMPAT_VERSION
-import Build_gradle.AppDeps.CONSTRAINT_LAYOUT_VERSION
-import Build_gradle.AppDeps.ESPRESSO_VERSION
-import Build_gradle.AppDeps.KOIN_ANDROID_VERSION
-import Build_gradle.AppDeps.KOTLINX_COROUTINES_VERSION
-import Build_gradle.AppDeps.KOTLIN_VERSION
-import Build_gradle.AppDeps.MATERIAL_VERSION
-import Build_gradle.AppDeps.MOCKITO_KOTLIN_VERSION
-import Build_gradle.AppDeps.NAV_VERSION
 import org.gradle.api.JavaVersion.VERSION_1_8
 
 /*=================================================================================*/
@@ -64,52 +51,6 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 
-/*=================================================================================*/
-object AppDeps {
-//    retrofit_version=2.9.0
-//    kotlinx_coroutines_version=1.6.1
-//    nav_version=2.5.3
-//    kotlin_version=1.7.20
-//    activityVersion=1.4.0
-//    app_compat_version=1.5.0
-//    constraint_layout_version=2.1.4
-//    androidx_arch_core_version=2.1.0
-//    coroutines_version=1.3.9
-//    lifecycle_version=2.4.1
-//    material_version=1.7.0
-//    espresso_version=3.4.0
-//    androidx_junit_version=1.1.4
-//    koin_android_version=3.3.0
-//    mockito_kotlin_version=4.0.0
-//    publisher_version=3.7.0
-//    androidx_core_version=1.9.0
-//    kotlinx_serialization_json.version=1.3.0
-//    springmockk.version=3.1.0
-//    mockk.version=1.12.0
-//    wiremock.version=2.31.0
-//    jackson_version=2.14.1
-
-
-    const val KOTLIN_VERSION = "kotlin_version"
-    const val ANDROIDX_CORE_VERSION = "androidx_core_version"
-    const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
-    const val NAV_VERSION = "nav_version"
-    const val KOIN_ANDROID_VERSION = "koin_android_version"
-    const val RETROFIT_VERSION = "retrofit_version"
-    const val MATERIAL_VERSION = "material_version"
-    const val ESPRESSO_VERSION = "espresso_version"
-    const val ANDROIDX_LIFECYCLE_VERSION = "androidx_lifecycle_version"//2.5.1
-    const val ANDROIDX_JUNIT_VERSION = "androidx_junit_version"
-    const val CONSTRAINT_LAYOUT_VERSION = "constraint_layout_version"
-    const val ANDROIDX_ARCH_CORE_VERSION = "androidx_arch_core_version"
-    const val APP_COMPAT_VERSION = "app_compat_version"
-    const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
-
-
-    const val ARROW_KT_VERSION = "arrow-kt_version"
-}
-/*=================================================================================*/
-fun String.dep(version:String) = "$this${properties[version]}"
 
 /*=================================================================================*/
 dependencies {
@@ -123,8 +64,8 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:2.2.4")
     implementation("io.ktor:ktor-client-content-negotiation:2.2.4")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.4")
-//            "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,
-//            "com.squareup.retrofit2:converter-moshi" to RETROFIT_VERSION,
+//            "com.squareup.retrofit2:retrofit" to 2.9.0,
+//            "com.squareup.retrofit2:converter-moshi" to 2.9.0,
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
@@ -144,41 +85,41 @@ dependencies {
 
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    androidTestImplementation("androidx.test.ext:junit:".dep(ANDROIDX_JUNIT_VERSION))
-    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:".dep(MOCKITO_KOTLIN_VERSION))
-    androidTestImplementation("androidx.navigation:navigation-testing:".dep(NAV_VERSION))
-    androidTestImplementation("androidx.arch.core:core-testing:".dep(ANDROIDX_ARCH_CORE_VERSION))
-    androidTestImplementation("androidx.test.espresso:espresso-core:".dep(ESPRESSO_VERSION)) {
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0") {
         exclude("com.android.support", "support-annotations")
     }
-    androidTestImplementation("io.insert-koin:koin-test:".dep(KOIN_ANDROID_VERSION))
+    androidTestImplementation("io.insert-koin:koin-test:3.3.0")
     androidTestImplementation("io.insert-koin:koin-test-junit4:3.2.2")
     androidTestImplementation("androidx.room:room-testing:2.4.3")
     androidTestImplementation("io.ktor:ktor-client-mock:2.2.4")
 
 
-    implementation("androidx.core:core-ktx:".dep(ANDROIDX_CORE_VERSION))
-    implementation("androidx.appcompat:appcompat:".dep(APP_COMPAT_VERSION))
-    implementation("com.google.android.material:material:".dep(MATERIAL_VERSION))
-    implementation("androidx.constraintlayout:constraintlayout:".dep(CONSTRAINT_LAYOUT_VERSION))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:".dep(KOTLINX_COROUTINES_VERSION))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:".dep(KOTLINX_COROUTINES_VERSION))
-    implementation("androidx.navigation:navigation-fragment-ktx:".dep(NAV_VERSION))
-    implementation("androidx.navigation:navigation-ui-ktx:".dep(NAV_VERSION))
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:".dep(NAV_VERSION))
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.5.0")
+    implementation("com.google.android.material:material:1.7.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.5.3")
     implementation("androidx.room:room-runtime:2.4.3")
     implementation("androidx.room:room-guava:2.4.3")
     implementation("androidx.room:room-paging:2.4.3")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:".dep(ANDROIDX_LIFECYCLE_VERSION))
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:".dep(ANDROIDX_LIFECYCLE_VERSION))
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:".dep(ANDROIDX_LIFECYCLE_VERSION))
-    implementation("androidx.lifecycle:lifecycle-common-java8:".dep(ANDROIDX_LIFECYCLE_VERSION))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:".dep(KOTLIN_VERSION))
-    implementation("androidx.constraintlayout:constraintlayout:".dep(CONSTRAINT_LAYOUT_VERSION))
-    implementation("com.google.android.material:material:".dep(MATERIAL_VERSION))
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.5.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.material:material:1.7.0")
     implementation("io.insert-koin:koin-core:3.2.2")
-    implementation("io.insert-koin:koin-android:".dep(KOIN_ANDROID_VERSION))
-    implementation("io.insert-koin:koin-androidx-workmanager:".dep(KOIN_ANDROID_VERSION))
-    implementation("io.insert-koin:koin-androidx-navigation:".dep(KOIN_ANDROID_VERSION))
+    implementation("io.insert-koin:koin-android:3.3.0")
+    implementation("io.insert-koin:koin-androidx-workmanager:3.3.0")
+    implementation("io.insert-koin:koin-androidx-navigation:3.3.0")
 }
 /*=================================================================================*/

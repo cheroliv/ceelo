@@ -1,28 +1,18 @@
 buildscript {
-
-
     repositories {
         google()
         gradlePluginPortal()
         mavenCentral()
     }
 
-    fun String.dep(version:String) = "$this${properties[version]}"
-
     dependencies {
-        val JACKSON_VERSION = "jackson_version"
-        val PUBLISHER_VERSION = "publisher_version"
-        val KOTLIN_VERSION = "kotlin_version"
-        val NAV_VERSION = "nav_version"
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:".dep(KOTLIN_VERSION))
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:".dep(NAV_VERSION))
-        classpath("com.fasterxml.jackson.module:jackson-module-kotlin:".dep(JACKSON_VERSION))
-        classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:".dep(JACKSON_VERSION))
-        classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:".dep(JACKSON_VERSION))
-        classpath("com.github.triplet.gradle:play-publisher:".dep(PUBLISHER_VERSION))
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+        classpath("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
+        classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.1")
+        classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1")
+        classpath("com.github.triplet.gradle:play-publisher:3.7.0")
     }
-
-
 }
 /*=================================================================================*/
 plugins {
