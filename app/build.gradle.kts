@@ -73,7 +73,7 @@ dependencies {
     testImplementation("io.insert-koin:koin-test:3.2.2")
     testImplementation("io.insert-koin:koin-test-junit4:3.2.2")
     testImplementation("io.ktor:ktor-client-mock:2.2.4")
-    testImplementation("ch.qos.logback:logback-classic:1.3.6")
+    testImplementation("ch.qos.logback:logback-classic:1.4.12")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("androidx.room:room-testing:2.4.3")

@@ -35,27 +35,33 @@ data class PlayerEntity(
 
         companion object {
             fun SupportSQLiteDatabase.checkDefaultPlayers() {
-                when (query("select * from Player").count) {
-                    0 -> {
-                        setOf(
-                            PlayerEntity(ONE, PLAYER_ONE_NAME).contentValues,
-                            PlayerEntity(TWO, PLAYER_TWO_NAME).contentValues,
-                        ).forEach {
-                            beginTransaction()
-                            insert("Player", CONFLICT_FAIL, it)
-                            setTransactionSuccessful()
-                            endTransaction()
-                            it.clear()
+                "select * from Player"
+                    .let(::query)
+                    .count
+                    .let {
+                        when (it) {
+                            0 -> {
+                                setOf(
+                                    PlayerEntity(ONE, PLAYER_ONE_NAME).contentValues,
+                                    PlayerEntity(TWO, PLAYER_TWO_NAME).contentValues,
+                                ).forEach {
+                                    beginTransaction()
+                                    insert("Player", CONFLICT_FAIL, it)
+                                    setTransactionSuccessful()
+                                    endTransaction()
+                                    it.clear()
+                                }
+                            }
                         }
                     }
-                }
             }
-
-            private val PlayerEntity.contentValues
-                get() = ContentValues(2).apply {
-                    put("id", id)
-                    put("login", login)
-                }
         }
+
+        private val PlayerEntity.contentValues
+            get() = ContentValues(2).apply {
+                put("id", id)
+                put("login", login)
+            }
     }
+}
 }
